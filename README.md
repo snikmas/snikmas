@@ -1,4 +1,4 @@
-# Hi there,
+# Hi there!
 
 I'm Mary, and I'm studying CS in China.
 
