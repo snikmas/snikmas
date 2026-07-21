@@ -21,8 +21,7 @@ to understand.
 - **Databases & tools:** SQLite, PostgreSQL, Linux, Git, systemd, pytest
 
 ## Some facts:
-т
-- I'm studying CS in Chinese 🥲 
+- I'm studying CS in Chinese 🥲
 - Most of my projects begin with a problem I personally want to solve
 - Away from the keyboard, I like going to the gym to clear my head
 - I like observing rather than speaking
