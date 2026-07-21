@@ -64,7 +64,9 @@ export const projects = [
 ]
 
 export const stack = {
-  backend: ['Python', 'FastAPI', 'SQLAlchemy', 'SQLite', 'Redis'],
-  systems: ['Linux', 'systemd', 'Git', 'pytest'],
-  ai: ['Gemini API', 'LLM APIs', 'Pydantic', 'Pandas', 'scikit-learn', 'Streamlit'],
+  languages: ['Python', 'JavaScript', 'Java', 'C', 'SQL'],
+  backend: ['FastAPI', 'Pydantic', 'SQLAlchemy', 'Redis', 'RQ', 'Node.js'],
+  frontend: ['React', 'Tailwind CSS', 'HTML/CSS', 'Streamlit'],
+  data: ['Pandas', 'NumPy', 'scikit-learn', 'LLM APIs'],
+  tools: ['SQLite', 'PostgreSQL', 'Linux', 'Git', 'systemd', 'pytest'],
 }

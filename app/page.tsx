@@ -151,9 +151,11 @@ export default function JournalPage() {
         <Entry label="stack" id="stack">
           <div className="grid max-w-2xl gap-x-8 gap-y-5 sm:grid-cols-2">
             {Object.entries({
+              languages: stack.languages,
               backend: stack.backend,
-              'systems & tooling': stack.systems,
-              'AI & data': stack.ai,
+              frontend: stack.frontend,
+              'data & AI': stack.data,
+              'databases & tools': stack.tools,
             }).map(([label, items]) => (
               <div key={label}>
                 <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
