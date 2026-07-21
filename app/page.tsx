@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { owner, projects, stack } from '@/components/site/data'
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
+
 export const metadata: Metadata = {
   title: 'Mary (snikmas) — Backend Developer & CS Student',
   description:
@@ -105,7 +107,7 @@ export default function JournalPage() {
 
           <div className="aspect-square w-52 self-start overflow-hidden border border-border bg-muted sm:w-60 lg:mt-5 lg:w-64">
             <Image
-              src="/mary-profile.webp"
+              src={`${basePath}/mary-profile.webp`}
               alt="Portrait of Mary"
               width={800}
               height={800}

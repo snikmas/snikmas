@@ -1,7 +1,8 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
@@ -12,10 +13,10 @@ export const metadata: Metadata = {
     'Personal portfolio and writing space of Mary, a computer science student in China building backend tools and experimenting with AI, LLMs, and automation.',
   icons: {
     icon: [
-      { url: '/icon-dark-32x32.png' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: `${basePath}/icon-dark-32x32.png` },
+      { url: `${basePath}/icon.svg`, type: 'image/svg+xml' },
     ],
-    apple: '/apple-icon.png',
+    apple: `${basePath}/apple-icon.png`,
   },
 }
 
@@ -34,10 +35,7 @@ export default function RootLayout({
       lang="en"
       className={`bg-background ${geist.variable} ${geistMono.variable}`}
     >
-      <body className="antialiased font-sans">
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
-      </body>
+      <body className="antialiased font-sans">{children}</body>
     </html>
   )
 }
