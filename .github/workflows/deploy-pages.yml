@@ -44,7 +44,7 @@ jobs:
       - name: Build static site
         run: pnpm build
         env:
-          NEXT_PUBLIC_BASE_PATH: /snikmas-site
+          NEXT_PUBLIC_BASE_PATH: /snikmas
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
