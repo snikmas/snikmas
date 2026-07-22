@@ -74,3 +74,39 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .article-copy {
+    @apply text-[1.05rem] leading-8 text-foreground;
+  }
+
+  .article-copy > p,
+  .article-copy > blockquote,
+  .article-copy > div {
+    @apply mx-auto mt-7 max-w-2xl;
+  }
+
+  .article-copy > p:first-child {
+    @apply mt-0 text-xl leading-9;
+  }
+
+  .article-copy blockquote {
+    @apply border-l-2 border-accent py-1 pl-6 text-xl leading-9 text-muted-foreground;
+  }
+
+  .article-copy .article-ending {
+    @apply border-y border-border py-6 font-mono text-base leading-8;
+  }
+
+  .article-copy .article-ending p + p {
+    @apply mt-1;
+  }
+
+  .article-copy .article-source {
+    @apply mt-14 border-t border-border pt-6 font-mono text-xs leading-6 text-muted-foreground;
+  }
+
+  .article-copy a {
+    @apply text-accent underline decoration-1 underline-offset-4;
+  }
+}

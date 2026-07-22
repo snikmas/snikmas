@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { owner, projects, stack } from '@/components/site/data'
+import Link from 'next/link'
+import { owner, posts, projects, stack } from '@/components/site/data'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
@@ -169,23 +170,24 @@ export default function JournalPage() {
 
         <Entry label="writing" id="writing">
           <div className="max-w-2xl">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-              notes coming soon
-            </p>
-            <p className="mt-3 leading-relaxed text-muted-foreground">
-              I&apos;m turning some of my shorter notes into longer posts about
-              programming, AI, books, life, and studying in China. Until then,
-              you can find my shorter updates on{' '}
-              <a
-                href={owner.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="text-accent underline decoration-1 underline-offset-4"
-              >
-                LinkedIn
-              </a>
-              .
-            </p>
+            {posts.map((post) => (
+              <article key={post.slug} className="group">
+                <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                  {post.date} · {post.category} · {post.readingTime}
+                </p>
+                <h2 className="mt-3 font-mono text-lg font-medium tracking-tight">
+                  <Link
+                    href={`/writing/${post.slug}`}
+                    className="transition-colors group-hover:text-accent"
+                  >
+                    {post.title} <span aria-hidden="true">→</span>
+                  </Link>
+                </h2>
+                <p className="mt-2 leading-relaxed text-muted-foreground">
+                  {post.excerpt}
+                </p>
+              </article>
+            ))}
           </div>
         </Entry>
 

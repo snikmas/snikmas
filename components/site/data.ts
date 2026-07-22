@@ -70,3 +70,15 @@ export const stack = {
   data: ['Pandas', 'NumPy', 'scikit-learn', 'LLM APIs'],
   tools: ['SQLite', 'PostgreSQL', 'Linux', 'Git', 'systemd', 'pytest'],
 }
+
+export const posts = [
+  {
+    slug: 'ai-hype-my-thoughts',
+    title: 'AI Hype: My Thoughts',
+    date: 'July 22, 2026',
+    category: 'Thoughts',
+    readingTime: '4 min read',
+    excerpt:
+      'On AI pressure, the fear of falling behind, and choosing to learn and build at your own pace.',
+  },
+]
