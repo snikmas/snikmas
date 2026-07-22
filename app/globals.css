@@ -87,7 +87,7 @@
   }
 
   .article-copy > p:first-child {
-    @apply mt-0 text-xl leading-9;
+    @apply mt-0;
   }
 
   .article-copy blockquote {
