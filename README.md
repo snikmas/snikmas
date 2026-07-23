@@ -38,4 +38,3 @@ I build practical software: APIs, Telegram bots, LLM apps, and small automation 
 - Fiverr: [fiverr.com/snikmas](https://www.fiverr.com/snikmas)
 - X: [x.com/snikmas](https://x.com/snikmas)
 
-If you need a small bot, FAQ assistant, or Python API — message me.
