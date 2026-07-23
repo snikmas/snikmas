@@ -1,28 +1,41 @@
-# Hi there!
+# Hi, I'm Mary (snikmas)
 
-I'm Mary, and I'm studying CS in China.
+CS student in China · Python backend & AI tools · RU / EN / CN
 
-I spend much of my free time building things with code, mostly around backend
-development, LLMs, and automation. I'm drawn to practical software: tools that
-begin with a real need and remain useful outside the code editor.
+I build practical software: APIs, Telegram bots, LLM apps, and small automation systems. Most projects start from a real problem and end as something you can run, test, and explain.
 
-Many of my projects start with something I personally want to solve: a Telegram
-file browser for accessing files on my laptop, a transcription app for getting
-subtitles from videos, or a crypto monitor for making noisy market data easier
-to understand.
+**Open to:** freelance · remote junior / part-time backend · AI app backend work
 
+## What I can ship
 
-## My stack
+- **Backend APIs** — FastAPI, auth, jobs/queues, Postgres/SQLite, Redis
+- **Telegram bots** — menus, workflows, allowlists, integrations
+- **LLM tools** — FAQ assistants, document summary pipelines, Gemini/Claude-style API apps
+- **Local ML utilities** — faster-whisper transcription, simple XGBoost risk dashboards
+
+## Featured projects
+
+| Project | What it shows |
+| --- | --- |
+| [study-china-faq-bot](https://github.com/snikmas/study-china-faq-bot) | Trust-first bilingual AI FAQ (classify → cited stored answers, not free-form hallucinations) |
+| [transcriber_app](https://github.com/snikmas/transcriber_app) | FastAPI + worker queue + local speech-to-text |
+| [ai-customer-support-ticket-system](https://github.com/snikmas/ai-customer-support-ticket-system) | Backend depth: JWT, RBAC, Redis, RQ routing, SLA, tests |
+| [document-summary](https://github.com/snikmas/document-summary) | Doc upload pipeline → structured AI summary |
+| [Crypto-market-risk-monitor](https://github.com/snikmas/Crypto-market-risk-monitor) | Data/ML dashboard from public market data |
+| [telegram-assistant](https://github.com/snikmas/telegram-assistant) | Narrow allowlisted Telegram control bot for local project runs |
+
+## Stack
 
 - **Languages:** Python, JavaScript, Java, C, SQL
-- **Backend:** FastAPI, Pydantic, SQLAlchemy, Redis, RQ, Node.js
-- **Frontend:** React, Tailwind CSS, HTML/CSS, Streamlit
-- **Data & AI:** Pandas, NumPy, scikit-learn, LLM APIs
-- **Databases & tools:** SQLite, PostgreSQL, Linux, Git, systemd, pytest
+- **Backend:** FastAPI, Pydantic, SQLAlchemy, Redis, RQ
+- **Frontend (enough for demos):** React, Streamlit, HTML/CSS
+- **Data & AI:** Pandas, NumPy, scikit-learn/XGBoost, LLM APIs
+- **Tools:** Linux, Git, Docker basics, pytest
 
-## Some facts:
-- I'm studying CS in Chinese 🥲
-- Most of my projects begin with a problem I personally want to solve
-- Away from the keyboard, I like going to the gym to clear my head
-- I like observing rather than speaking
-- I'm always happy to meet new people and chat with them
+## Links
+
+- GitHub: [github.com/snikmas](https://github.com/snikmas)
+- Fiverr: [fiverr.com/snikmas](https://www.fiverr.com/snikmas)
+- X: [x.com/snikmas](https://x.com/snikmas)
+
+If you need a small bot, FAQ assistant, or Python API — message me.
