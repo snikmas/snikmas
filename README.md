@@ -1,4 +1,4 @@
-# Hi, I'm Mary (snikmas)
+# Hi, I'm Mary 
 
 CS student in China · Python backend & AI tools · RU / EN / CN
 
