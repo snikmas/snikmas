@@ -28,9 +28,3 @@ I build practical software: APIs, Telegram bots, LLM apps, and small automation 
 - **Data & AI:** Pandas, NumPy, scikit-learn/XGBoost, LLM APIs
 - **Tools:** Linux, Git, Docker basics, pytest
 
-## Links
-
-- GitHub: [github.com/snikmas](https://github.com/snikmas)
-- Fiverr: [fiverr.com/snikmas](https://www.fiverr.com/snikmas)
-- X: [x.com/snikmas](https://x.com/snikmas)
-
