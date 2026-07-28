@@ -3,10 +3,7 @@
 CS student in China · Python backend & AI tools · RU / EN / CN
 
 I build practical software: APIs, Telegram bots, LLM apps, and small automation systems. Most projects start from a real problem and end as something you can run, test, and explain.
-
-**Open to:** freelance · remote junior / part-time backend · AI app backend work
-
-## What I can ship
+## What I've build
 
 - **Backend APIs** — FastAPI, auth, jobs/queues, Postgres/SQLite, Redis
 - **Telegram bots** — menus, workflows, allowlists, integrations
@@ -21,7 +18,6 @@ I build practical software: APIs, Telegram bots, LLM apps, and small automation 
 | [transcriber_app](https://github.com/snikmas/transcriber_app) | FastAPI + worker queue + local speech-to-text |
 | [ai-customer-support-ticket-system](https://github.com/snikmas/ai-customer-support-ticket-system) | Backend depth: JWT, RBAC, Redis, RQ routing, SLA, tests |
 | [document-summary](https://github.com/snikmas/document-summary) | Doc upload pipeline → structured AI summary |
-| [Crypto-market-risk-monitor](https://github.com/snikmas/Crypto-market-risk-monitor) | Data/ML dashboard from public market data |
 | [telegram-assistant](https://github.com/snikmas/telegram-assistant) | Narrow allowlisted Telegram control bot for local project runs |
 
 ## Stack
