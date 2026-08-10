@@ -3,7 +3,7 @@
 CS student in China · Python backend & AI tools · RU / EN / CN
 
 I build practical software: APIs, Telegram bots, LLM apps, and small automation systems. Most projects start from a real problem.
-## What I've build
+## What I've built
 
 - **Backend APIs** — FastAPI, auth, jobs/queues, Postgres/SQLite, Redis
 - **Telegram bots** — menus, workflows, allowlists, integrations
