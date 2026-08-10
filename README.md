@@ -1,20 +1,31 @@
-# Hi, I'm Mary 
+# Hi, I'm Mary
 
-CS student in China · Python backend & AI tools · RU / EN / CN
+CS student in China building Python backends and reliable AI application infrastructure. I work in Russian, English, and Chinese.
 
-I build practical software: APIs, Telegram bots, LLM apps, and small automation systems. Most projects start from a real problem.
-## What I've built
+I build tested APIs, database-backed workflows, background-processing systems, and controlled AI integrations. I care about clear failure states, reproducible setup, and code that another developer can continue working with.
 
-- **Backend APIs** — FastAPI, auth, jobs/queues, Postgres/SQLite, Redis
-- **Telegram bots** — menus, workflows, allowlists, integrations
-- **LLM tools** — FAQ assistants, document summary pipelines, Gemini/Claude-style API apps
-- **Local ML utilities** — faster-whisper transcription, simple XGBoost risk dashboards
+## Selected projects
 
-## Stack
+- [AI Customer Support Ticket System](https://github.com/snikmas/ai-customer-support-ticket-system) — FastAPI backend with JWT authentication, RBAC, SQLAlchemy/Alembic, Redis/RQ jobs, SLA workflows, durable AI results, Docker, and automated tests.
+- [Transcriber App](https://github.com/snikmas/transcriber_app) — local audio/video transcription service with durable job state, background processing, recovery, timestamps, FastAPI, Streamlit, and Docker.
+- [Study in China FAQ Bot](https://github.com/snikmas/study-china-faq-bot) — bilingual AI FAQ application designed around citations, constrained answers, explicit fallbacks, and evaluation cases.
+- [Codex Watch](https://github.com/snikmas/codex-watch) — a Rust CLI for estimating local Codex five-hour usage pressure.
+- [Crypto Market Risk Monitor](https://github.com/snikmas/crypto-market-risk-monitor) — reproducible market-data and ML pipeline with a Streamlit risk dashboard.
 
-- **Languages:** Python, JavaScript, Java, C, SQL
-- **Backend:** FastAPI, Pydantic, SQLAlchemy, Redis, RQ
-- **Frontend (enough for demos):** React, Streamlit, HTML/CSS
-- **Data & AI:** Pandas, NumPy, scikit-learn, LLM APIs
-- **Tools:** Linux, Git, pytest
+## Main stack
 
+- **Backend:** Python, FastAPI, Pydantic, SQLAlchemy, Alembic
+- **Data and jobs:** PostgreSQL, SQLite, Redis, RQ, Pandas
+- **Quality and delivery:** pytest, Git, Linux, Docker, REST/OpenAPI
+- **Supporting UI:** React, TypeScript, Streamlit, HTML/CSS
+- **AI applications:** external model APIs, structured outputs, persistence, fallbacks, and evaluation cases
+
+## What I can contribute
+
+- Build or extend a tested FastAPI feature or REST API
+- Add authentication, permissions, database models, and migrations
+- Implement background jobs and document/media-processing workflows
+- Integrate an external or LLM API with validation and failure handling
+- Add API regression tests and improve backend reliability
+
+I am open to junior Python backend and AI-application roles, internships, and carefully scoped freelance backend projects.
