@@ -58,11 +58,11 @@ export const projects = [
     slug: 'codex-watch',
     name: 'Codex Usage Watch',
     year: '2026',
-    stack: ['Rust', 'SQLite', 'Shell'],
+    stack: ['CLI', 'SQLite', 'Shell'],
     url: 'https://github.com/snikmas/codex-watch',
     summary: {
-      en: 'A Rust CLI that turns locally recorded weekly usage changes into a five-hour Codex estimate. It keeps the history in SQLite and reports status, warning levels, and diagnostics without blocking Codex.',
-      zh: '一个用 Rust 写的本地 CLI，把 Codex 记录的周用量变化换算成五小时使用估算。它用 SQLite 保存历史，并提供状态、预警和诊断命令，但不会限制 Codex 的使用。',
+      en: 'A local CLI that turns recorded weekly usage changes into a five-hour Codex estimate. It keeps the history in SQLite and reports status, warning levels, and diagnostics while you keep working.',
+      zh: '一个本地 CLI，把 Codex 记录的周用量变化换算成五小时使用估算。它用 SQLite 保存历史，并在你正常使用的同时提供状态、预警和诊断命令。',
     },
   },
   {
@@ -83,7 +83,7 @@ export const projects = [
     stack: ['Python', 'Telegram Bot API', 'systemd'],
     url: 'https://github.com/snikmas/telegram-filer',
     summary: {
-      en: 'A self-hosted Telegram bot that gives one approved user access to allowlisted laptop folders. It searches filenames and file contents, previews or downloads files, moves confirmed deletions to trash, and opens no inbound port.',
+      en: 'A self-hosted Telegram bot that gives one approved user access to allowlisted folders on your laptop from anywhere. It searches filenames and file contents, previews or downloads files, moves confirmed deletions to trash, and opens no inbound port.',
       zh: '一个本地部署、仅限指定用户使用的 Telegram 文件机器人。它只访问白名单文件夹，可以搜索、预览、下载文件，并在确认后把文件移入回收站，无需开放入站端口。',
     },
   },
@@ -92,7 +92,7 @@ export const projects = [
 export const toolkit = [
   {
     label: { en: 'Core', zh: '主要语言' },
-    items: ['Python', 'TypeScript', 'Rust', 'SQL'],
+    items: ['Python', 'TypeScript', 'SQL'],
   },
   {
     label: { en: 'Backend', zh: '后端' },
