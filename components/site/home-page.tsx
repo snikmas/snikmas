@@ -57,11 +57,11 @@ export function HomePage({ locale }: { locale: Locale }) {
             <Link
               href={alternateHref}
               hrefLang={isChinese ? 'en' : 'zh-CN'}
-              className="language-switch min-h-11 text-xs font-medium"
+              className="language-switch inline-flex min-h-11 items-center gap-2 whitespace-nowrap px-1 text-xs font-medium"
               aria-label={isChinese ? 'Switch to English' : '切换到中文'}
             >
               <span className={isChinese ? 'text-muted-foreground' : 'text-foreground'}>EN</span>
-              <span aria-hidden="true" className="mx-1.5 text-border">/</span>
+              <span aria-hidden="true" className="text-border">/</span>
               <span className={isChinese ? 'text-foreground' : 'text-muted-foreground'}>中文</span>
             </Link>
           </div>
@@ -105,6 +105,7 @@ export function HomePage({ locale }: { locale: Locale }) {
                 sizes="(min-width: 1024px) 240px, (min-width: 768px) 208px, 176px"
                 className="avatar-sprite h-full w-full object-contain object-bottom"
               />
+              <div className="avatar-step" aria-hidden="true" />
             </div>
           </div>
         </section>
@@ -168,9 +169,8 @@ export function HomePage({ locale }: { locale: Locale }) {
           </dl>
         </Section>
 
-        <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-border py-6 text-sm text-muted-foreground">
+        <footer className="border-t border-border py-6 text-sm text-muted-foreground">
           <span>© 2026 {owner.name}</span>
-          <span>{copy.footer}</span>
         </footer>
       </main>
     </div>

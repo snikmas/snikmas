@@ -29,7 +29,6 @@ export const siteCopy = {
     toolkitNote: 'The tools behind the projects above. I list what I use, not every library I have opened once.',
     openProject: 'Open project',
     articleLanguage: 'English article',
-    footer: 'Built and written by Mary.',
   },
   zh: {
     localeName: '中文',
@@ -51,7 +50,6 @@ export const siteCopy = {
     toolkitNote: '这些技术都用在上面的项目里。我只列常用的，不把碰过一次的库也塞进来。',
     openProject: '查看项目',
     articleLanguage: '英文文章',
-    footer: '由 Mary 设计、编写并维护。',
   },
 } satisfies Record<Locale, object>
 
