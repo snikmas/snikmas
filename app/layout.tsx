@@ -9,9 +9,9 @@ const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
 
 export const metadata: Metadata = {
-  title: 'Mary (snikmas) — Backend Developer & CS Student',
+  title: 'Mary (snikmas) | Notes and projects',
   description:
-    'Personal portfolio and writing space of Mary, a computer science student in China building backend tools and experimenting with AI, LLMs, and automation.',
+    'A bilingual personal site with writing, selected software projects, and a small profile.',
   icons: {
     icon: [
       { url: `${basePath}/icon-dark-32x32.png` },
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'dark',
-  themeColor: '#211e1a',
+  themeColor: '#151412',
 }
 
 export default function RootLayout({

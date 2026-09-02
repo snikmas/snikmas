@@ -6,7 +6,7 @@ const post = posts[0]
 
 export const metadata: Metadata = {
   title: `${post.title} — Mary (snikmas)`,
-  description: post.excerpt,
+  description: post.excerpt.en,
 }
 
 export default function AiHypeThoughtsPost() {

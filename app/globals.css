@@ -29,53 +29,124 @@
   --radius-xl: calc(var(--radius) * 1.4);
 }
 
-/* Base: shared dark charcoal + warm white */
+/* Dark editorial palette with one restrained game-like accent. */
 :root {
   color-scheme: dark;
-  --background: oklch(0.19 0.006 70);
-  --foreground: oklch(0.93 0.008 85);
-  --muted: oklch(0.25 0.006 70);
-  --muted-foreground: oklch(0.66 0.01 80);
-  --accent: oklch(0.78 0.12 75);
-  --accent-foreground: oklch(0.19 0.006 70);
-  --border: oklch(0.32 0.006 70);
-  --card: oklch(0.22 0.006 70);
-  --card-foreground: oklch(0.93 0.008 85);
-  --primary: oklch(0.93 0.008 85);
-  --primary-foreground: oklch(0.19 0.006 70);
-  --secondary: oklch(0.25 0.006 70);
-  --secondary-foreground: oklch(0.93 0.008 85);
-  --popover: oklch(0.22 0.006 70);
-  --popover-foreground: oklch(0.93 0.008 85);
-  --input: oklch(0.32 0.006 70);
-  --ring: oklch(0.66 0.01 80);
+  --background: oklch(0.155 0.008 75);
+  --foreground: oklch(0.91 0.012 84);
+  --muted: oklch(0.22 0.01 75);
+  --muted-foreground: oklch(0.68 0.014 82);
+  --accent: oklch(0.79 0.105 142);
+  --accent-foreground: oklch(0.15 0.012 75);
+  --border: oklch(0.31 0.012 75);
+  --card: oklch(0.185 0.009 75);
+  --card-foreground: oklch(0.91 0.012 84);
+  --primary: oklch(0.91 0.012 84);
+  --primary-foreground: oklch(0.15 0.012 75);
+  --secondary: oklch(0.22 0.01 75);
+  --secondary-foreground: oklch(0.91 0.012 84);
+  --popover: oklch(0.185 0.009 75);
+  --popover-foreground: oklch(0.91 0.012 84);
+  --input: oklch(0.31 0.012 75);
+  --ring: oklch(0.79 0.105 142);
   --destructive: oklch(0.6 0.2 25);
   --radius: 0.25rem;
 }
 
-/* Personal journal theme */
 .dir-journal {
-  --background: oklch(0.17 0 0);
-  --foreground: oklch(0.87 0 0);
-  --muted: oklch(0.23 0 0);
-  --muted-foreground: oklch(0.58 0 0);
-  --accent: oklch(0.98 0 0);
-  --accent-foreground: oklch(0.17 0 0);
-  --border: oklch(0.3 0 0);
-  --card: oklch(0.2 0 0);
-  --card-foreground: oklch(0.87 0 0);
+  background-image:
+    radial-gradient(circle at 82% 2%, oklch(0.3 0.045 142 / 0.28), transparent 30rem),
+    radial-gradient(circle at 12% 18%, oklch(0.25 0.025 70 / 0.2), transparent 24rem),
+    linear-gradient(var(--background), var(--background));
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 5rem;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
   }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer components {
+  .section-label {
+    letter-spacing: 0.01em;
+  }
+
+  .nav-link,
+  .title-link,
+  .project-link {
+    transition: color 160ms ease;
+  }
+
+  .nav-link:hover,
+  .title-link:hover,
+  .project-link:hover {
+    color: var(--accent);
+  }
+
+  .language-switch,
+  .social-link {
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .language-switch:hover,
+  .social-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .avatar-wrap {
+    position: relative;
+    isolation: isolate;
+    align-self: end;
+  }
+
+  .avatar-sprite {
+    filter: drop-shadow(0 16px 18px oklch(0 0 0 / 0.32));
+    image-rendering: pixelated;
+    transform: translateY(1px);
+  }
+
+  .project-row {
+    transition: background-color 160ms ease;
+  }
+
+  .project-row:hover {
+    background: oklch(0.2 0.012 85 / 0.72);
+  }
+
+  .title-link:visited,
+  .project-link:visited {
+    color: oklch(0.76 0.055 78);
+  }
+
   .article-copy {
     @apply text-[1.05rem] leading-8 text-foreground;
   }
@@ -95,7 +166,7 @@
   }
 
   .article-copy .article-ending {
-    @apply border-y border-border py-6 font-mono text-base leading-8;
+    @apply border-y border-border py-6 text-base leading-8;
   }
 
   .article-copy .article-ending p + p {
@@ -103,10 +174,20 @@
   }
 
   .article-copy .article-source {
-    @apply mt-14 border-t border-border pt-6 font-mono text-xs leading-6 text-muted-foreground;
+    @apply mt-14 border-t border-border pt-6 text-xs leading-6 text-muted-foreground;
   }
 
   .article-copy a {
     @apply text-accent underline decoration-1 underline-offset-4;
   }
+}
+
+@media (max-width: 639px) {
+  .project-number {
+    display: none;
+  }
+}
+
+:lang(zh-CN) {
+  font-family: var(--font-geist), "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
