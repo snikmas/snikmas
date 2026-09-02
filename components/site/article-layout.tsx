@@ -24,7 +24,7 @@ export function ArticleLayout({
             Mary / snikmas
           </Link>
           <Link
-            href="/#writing"
+            href="/writing"
             className="text-xs text-muted-foreground transition-colors hover:text-accent"
           >
             ← all writing
@@ -50,7 +50,7 @@ export function ArticleLayout({
         </article>
 
         <footer className="mt-20 border-t border-border pt-6 text-xs text-muted-foreground">
-          <Link href="/#writing" className="transition-colors hover:text-accent">
+          <Link href="/writing" className="transition-colors hover:text-accent">
             ← Back to writing
           </Link>
         </footer>

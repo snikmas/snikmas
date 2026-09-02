@@ -26,9 +26,10 @@ export const siteCopy = {
     projectsLabel: 'Selected projects',
     projectsNote: 'Three projects I currently keep pinned on GitHub. I care more about the problem and the engineering choices than a long list of tools.',
     toolkitLabel: 'Working toolkit',
-    toolkitNote: 'The tools behind the projects above. I list what I use, not every library I have opened once.',
+    toolkitNote: "What I reach for when something needs to ship. If it's here, it's been in a real project.",
     openProject: 'Open project',
     articleLanguage: 'English article',
+    allWriting: 'All writing',
   },
   zh: {
     localeName: '中文',
@@ -39,7 +40,7 @@ export const siteCopy = {
       toolkit: '技术栈',
     },
     aboutLabel: '关于我',
-    greeting: '你好，我是 Mary。',
+    greeting: '嗨，我是 Mary',
     bio: '我在郑州读计算机科学，主要做后端开发。我喜欢把 API、后台任务和 AI 模型组合成能解决具体问题的小工具。',
     note: '这里放我的项目笔记、还没想完的问题，以及关于编程、AI、读书和中俄生活的记录。',
     socialLabel: '社交主页',
@@ -47,9 +48,10 @@ export const siteCopy = {
     projectsLabel: '项目',
     projectsNote: '这里放三个目前置顶在 GitHub 的项目。我更想说明它们解决了什么问题，以及我如何实现它们，而不是只列技术栈。',
     toolkitLabel: '常用技术',
-    toolkitNote: '这些技术都用在上面的项目里。我只列常用的，不把碰过一次的库也塞进来。',
+    toolkitNote: '真正要交付项目时我会用的东西。列在这里的，都在实际项目里跑过。',
     openProject: '查看项目',
     articleLanguage: '英文文章',
+    allWriting: '全部文章',
   },
 } satisfies Record<Locale, object>
 
@@ -91,20 +93,21 @@ export const projects = [
 
 export const toolkit = [
   {
-    label: { en: 'Core', zh: '主要语言' },
-    items: ['Python', 'TypeScript', 'SQL'],
+    label: { en: 'Main stack', zh: '主力技术栈' },
+    items: ['Python', 'TypeScript', 'SQL', 'FastAPI', 'PostgreSQL', 'Redis', 'Docker'],
   },
   {
-    label: { en: 'Backend', zh: '后端' },
-    items: ['FastAPI', 'Pydantic', 'SQLAlchemy', 'PostgreSQL', 'Redis'],
-  },
-  {
-    label: { en: 'Testing and delivery', zh: '测试与交付' },
-    items: ['pytest', 'Docker', 'GitHub Actions', 'Linux'],
-  },
-  {
-    label: { en: 'Applied AI', zh: 'AI 应用' },
-    items: ['structured outputs', 'evaluation cases', 'provider APIs', 'faster-whisper'],
+    label: { en: 'Also worked with', zh: '也用这些做过项目' },
+    items: [
+      'Pydantic',
+      'SQLAlchemy',
+      'pytest',
+      'GitHub Actions',
+      'React',
+      'Telegram Bot API',
+      'faster-whisper',
+      'Linux',
+    ],
   },
 ]
 

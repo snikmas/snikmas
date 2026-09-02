@@ -49,7 +49,7 @@ export function HomePage({ locale }: { locale: Locale }) {
 
           <div className="flex items-center gap-5">
             <nav aria-label={isChinese ? '页面导航' : 'Page sections'} className="hidden items-center gap-5 text-sm text-muted-foreground sm:flex">
-              <a href="#writing" className="nav-link">{copy.nav.writing}</a>
+              <Link href="/writing" className="nav-link">{copy.nav.writing}</Link>
               <a href="#projects" className="nav-link">{copy.nav.projects}</a>
               <a href="#toolkit" className="nav-link">{copy.nav.toolkit}</a>
             </nav>
@@ -111,7 +111,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         </section>
 
         <Section id="writing" label={copy.writingLabel}>
-          {posts.map((post) => (
+          {posts.slice(0, 3).map((post) => (
             <article key={post.slug} className="group max-w-2xl">
               <p className="text-sm text-muted-foreground">
                 {isChinese ? post.dateZh : post.date}
@@ -127,13 +127,20 @@ export function HomePage({ locale }: { locale: Locale }) {
               <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt[locale]}</p>
             </article>
           ))}
+          <Link
+            href="/writing"
+            className="title-link mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium"
+          >
+            {copy.allWriting}
+            <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
+          </Link>
         </Section>
 
         <Section id="projects" label={copy.projectsLabel}>
           <p className="mb-8 max-w-2xl leading-7 text-muted-foreground">{copy.projectsNote}</p>
-          <div className="divide-y divide-border border-y border-border">
+          <div className="-mx-3 divide-y divide-border border-y border-border">
             {projects.map((project, index) => (
-              <article key={project.slug} className="project-row grid gap-3 py-6 sm:grid-cols-[2.25rem_1fr_auto] sm:gap-5">
+              <article key={project.slug} className="project-row grid gap-3 px-3 py-6 sm:grid-cols-[2.25rem_1fr_auto] sm:gap-5">
                 <span className="project-number pt-1 text-xs text-muted-foreground" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
                 </span>
