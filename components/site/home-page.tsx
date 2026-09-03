@@ -49,9 +49,9 @@ export function HomePage({ locale }: { locale: Locale }) {
 
           <div className="flex items-center gap-5">
             <nav aria-label={isChinese ? '页面导航' : 'Page sections'} className="hidden items-center gap-5 text-sm text-muted-foreground sm:flex">
-              <Link href="/writing" className="nav-link">{copy.nav.writing}</Link>
-              <a href="#projects" className="nav-link">{copy.nav.projects}</a>
               <a href="#toolkit" className="nav-link">{copy.nav.toolkit}</a>
+              <a href="#projects" className="nav-link">{copy.nav.projects}</a>
+              <Link href="/writing" className="nav-link">{copy.nav.writing}</Link>
             </nav>
 
             <Link
@@ -110,30 +110,16 @@ export function HomePage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <Section id="writing" label={copy.writingLabel}>
-          {posts.slice(0, 3).map((post) => (
-            <article key={post.slug} className="group max-w-2xl">
-              <p className="text-sm text-muted-foreground">
-                {isChinese ? post.dateZh : post.date}
-                <span aria-hidden="true"> · </span>
-                {copy.articleLanguage}
-              </p>
-              <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-                <Link href={`/writing/${post.slug}`} className="title-link inline-flex min-h-11 items-center gap-2">
-                  {post.title}
-                  <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
-                </Link>
-              </h3>
-              <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt[locale]}</p>
-            </article>
-          ))}
-          <Link
-            href="/writing"
-            className="title-link mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium"
-          >
-            {copy.allWriting}
-            <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
-          </Link>
+        <Section id="toolkit" label={copy.toolkitLabel}>
+          <p className="mb-8 max-w-2xl leading-7 text-muted-foreground">{copy.toolkitNote}</p>
+          <dl className="grid gap-x-10 gap-y-7 sm:grid-cols-2">
+            {toolkit.map((group) => (
+              <div key={group.label.en}>
+                <dt className="text-sm font-medium">{group.label[locale]}</dt>
+                <dd className="mt-2 leading-7 text-muted-foreground">{group.items.join(', ')}</dd>
+              </div>
+            ))}
+          </dl>
         </Section>
 
         <Section id="projects" label={copy.projectsLabel}>
@@ -164,16 +150,30 @@ export function HomePage({ locale }: { locale: Locale }) {
           </div>
         </Section>
 
-        <Section id="toolkit" label={copy.toolkitLabel}>
-          <p className="mb-8 max-w-2xl leading-7 text-muted-foreground">{copy.toolkitNote}</p>
-          <dl className="grid gap-x-10 gap-y-7 sm:grid-cols-2">
-            {toolkit.map((group) => (
-              <div key={group.label.en}>
-                <dt className="text-sm font-medium">{group.label[locale]}</dt>
-                <dd className="mt-2 leading-7 text-muted-foreground">{group.items.join(', ')}</dd>
-              </div>
-            ))}
-          </dl>
+        <Section id="writing" label={copy.writingLabel}>
+          {posts.slice(0, 3).map((post) => (
+            <article key={post.slug} className="group max-w-2xl">
+              <p className="text-sm text-muted-foreground">
+                {isChinese ? post.dateZh : post.date}
+                <span aria-hidden="true"> · </span>
+                {post.languages.join(' · ')}
+              </p>
+              <h3 className="mt-2 text-2xl font-semibold tracking-tight">
+                <Link href={`/writing/${post.slug}`} className="title-link inline-flex min-h-11 items-center gap-2">
+                  {post.title}
+                  <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
+                </Link>
+              </h3>
+              <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt[locale]}</p>
+            </article>
+          ))}
+          <Link
+            href="/writing"
+            className="title-link mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium"
+          >
+            {copy.allWriting}
+            <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
+          </Link>
         </Section>
 
         <footer className="border-t border-border py-6 text-sm text-muted-foreground">
