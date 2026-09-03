@@ -5,7 +5,7 @@ import { posts } from '@/components/site/data'
 const post = posts[0]
 
 export const metadata: Metadata = {
-  title: `${post.title} — Mary (snikmas)`,
+  title: `${post.title} — snikmas`,
   description: post.excerpt.en,
 }
 

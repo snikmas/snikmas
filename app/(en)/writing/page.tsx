@@ -6,7 +6,7 @@ import { posts } from '@/components/site/data'
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
 export const metadata: Metadata = {
-  title: 'Writing — Mary (snikmas)',
+  title: 'Writing — snikmas',
   description:
     'Notes on programming, AI, books, and life between Russia and China.',
   alternates: {
