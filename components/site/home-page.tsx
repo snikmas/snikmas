@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
+import { ArrowUpRight, AtSign, BookOpen, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
 import { type Locale, owner, posts, projects, siteCopy, toolkit } from './data'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
@@ -8,8 +8,15 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 const socialLinks = [
   { label: 'GitHub', href: owner.github, icon: Code2 },
   { label: 'LinkedIn', href: owner.linkedin, icon: BriefcaseBusiness },
+  { label: 'X', href: owner.x, icon: AtSign },
   { label: 'Email', href: `mailto:${owner.email}`, icon: Mail },
 ]
+
+const rednoteLink = {
+  label: '小红书',
+  href: `https://www.xiaohongshu.com/search_result?keyword=${owner.rednote}`,
+  icon: BookOpen,
+}
 
 function Section({
   id,
@@ -37,6 +44,9 @@ export function HomePage({ locale }: { locale: Locale }) {
   const copy = siteCopy[locale]
   const isChinese = locale === 'zh'
   const alternateHref = isChinese ? '/' : '/zh'
+  const links = isChinese
+    ? [...socialLinks.slice(0, 3), rednoteLink, ...socialLinks.slice(3)]
+    : socialLinks
 
   return (
     <div className="dir-journal min-h-svh bg-background text-foreground" lang={copy.htmlLang}>
@@ -80,7 +90,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               <p className="mt-3 max-w-xl leading-7 text-muted-foreground">{copy.note}</p>
 
               <div className="mt-7 flex flex-wrap items-center gap-2" aria-label={copy.socialLabel}>
-                {socialLinks.map(({ label, href, icon: Icon }) => (
+                {links.map(({ label, href, icon: Icon }) => (
                   <a
                     key={label}
                     href={href}

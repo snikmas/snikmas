@@ -6,6 +6,8 @@ export const owner = {
   email: 'mary.snikk@gmail.com',
   github: 'https://github.com/snikmas',
   linkedin: 'https://www.linkedin.com/in/snikmas/',
+  x: 'https://x.com/snikmas',
+  rednote: '1282530219',
 }
 
 export const siteCopy = {
@@ -26,7 +28,7 @@ export const siteCopy = {
     projectsLabel: 'Projects',
     projectsNote: 'Three projects currently pinned on GitHub.',
     toolkitLabel: 'Working toolkit',
-    toolkitNote: "What I reach for when something needs to ship. If it's here, it's been in a real project.",
+    toolkitNote: "What I reach for when something needs to ship. If it's here, it's been in one of my projects.",
     openProject: 'Open project',
     allWriting: 'All writing',
   },
@@ -47,7 +49,7 @@ export const siteCopy = {
     projectsLabel: '项目',
     projectsNote: '目前置顶在 GitHub 的三个项目。',
     toolkitLabel: '常用技术',
-    toolkitNote: '真正要交付项目时我会用的东西。列在这里的，都在实际项目里跑过。',
+    toolkitNote: '真正要交付项目时我会用的东西。列在这里的，都在我自己的项目里跑过。',
     openProject: '查看项目',
     allWriting: '全部文章',
   },
