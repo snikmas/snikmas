@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { HomePage } from '@/components/site/home-page'
+import { getPinnedProjects } from '@/lib/github-projects'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function EnglishHomePage() {
-  return <HomePage locale="en" />
+export default async function EnglishHomePage() {
+  const projects = await getPinnedProjects()
+
+  return <HomePage locale="en" projects={projects} />
 }

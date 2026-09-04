@@ -66,39 +66,35 @@ export const siteCopy = {
   },
 } satisfies Record<Locale, object>
 
-export const projects = [
+export type Project = {
+  slug: string
+  name: string
+  url: string
+  description: string | null
+  languages: string[]
+}
+
+export const fallbackProjects: Project[] = [
   {
     slug: 'codex-watch',
-    name: 'Codex Usage Watch',
-    year: '2026',
-    stack: ['CLI', 'SQLite', 'Shell'],
+    name: 'codex-watch',
     url: 'https://github.com/snikmas/codex-watch',
-    summary: {
-      en: 'A local CLI that turns recorded weekly usage changes into a five-hour Codex estimate. It keeps the history in SQLite and reports status, warning levels, and diagnostics while you keep working.',
-      zh: '一个本地 CLI，把 Codex 记录的周用量变化换算成五小时使用估算。它用 SQLite 保存历史，并在你正常使用的同时提供状态、预警和诊断命令。',
-    },
+    description: 'local, non-blocking estimate of Codex five-hour usage pressure',
+    languages: ['Rust'],
   },
   {
-    slug: 'resolve-ai',
-    name: 'ResolveAI',
-    year: '2026',
-    stack: ['FastAPI', 'PostgreSQL', 'Redis + RQ', 'React'],
+    slug: 'ai-customer-support-ticket-system',
+    name: 'ai-customer-support-ticket-system',
     url: 'https://github.com/snikmas/ai-customer-support-ticket-system',
-    summary: {
-      en: 'A full-stack support-ticket system with JWT authentication, role-based permissions, automatic routing through Redis and RQ, SLA tracking, and durable AI analysis. The React staff workspace uses the FastAPI backend.',
-      zh: '一个完整的客服工单系统，包含 JWT 登录、角色权限、Redis 和 RQ 自动分单、SLA 跟踪及可持久化的 AI 分析。React 工作台直接使用同一套 FastAPI 后端。',
-    },
+    description: 'FastAPI support-ticket backend: JWT, RBAC, Redis, RQ routing, SLA, tests',
+    languages: ['Python'],
   },
   {
-    slug: 'telegram-filer',
-    name: 'Telegram Filer',
-    year: '2026',
-    stack: ['Python', 'Telegram Bot API', 'systemd'],
-    url: 'https://github.com/snikmas/telegram-filer',
-    summary: {
-      en: 'A self-hosted Telegram bot that gives one approved user access to allowlisted folders on your laptop from anywhere. It searches filenames and file contents, previews or downloads files, moves confirmed deletions to trash, and opens no inbound port.',
-      zh: '一个本地部署、仅限指定用户使用的 Telegram 文件机器人。它只访问白名单文件夹，可以搜索、预览、下载文件，并在确认后把文件移入回收站，无需开放入站端口。',
-    },
+    slug: 'reckoning-3.0',
+    name: 'reckoning-3.0',
+    url: 'https://github.com/snikmas/reckoning-3.0',
+    description: 'A local-first personal agent for decisions that matter.',
+    languages: ['Python'],
   },
 ]
 

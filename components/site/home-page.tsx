@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight, AtSign, BookOpen, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
-import { type Locale, owner, posts, projects, siteCopy, toolkit } from './data'
+import { type Locale, owner, posts, type Project, siteCopy, toolkit } from './data'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
@@ -40,7 +40,7 @@ function Section({
   )
 }
 
-export function HomePage({ locale }: { locale: Locale }) {
+export function HomePage({ locale, projects }: { locale: Locale; projects: Project[] }) {
   const copy = siteCopy[locale]
   const isChinese = locale === 'zh'
   const alternateHref = isChinese ? '/' : '/zh'
@@ -143,8 +143,12 @@ export function HomePage({ locale }: { locale: Locale }) {
                 </span>
                 <div>
                   <h3 className="text-lg font-semibold tracking-tight">{project.name}</h3>
-                  <p className="mt-1.5 max-w-2xl leading-7 text-muted-foreground">{project.summary[locale]}</p>
-                  <p className="mt-3 text-xs text-muted-foreground">{project.stack.join(' · ')}</p>
+                  {project.description && (
+                    <p className="mt-1.5 max-w-2xl leading-7 text-muted-foreground">{project.description}</p>
+                  )}
+                  {project.languages.length > 0 && (
+                    <p className="mt-3 text-xs text-muted-foreground">{project.languages.join(' · ')}</p>
+                  )}
                 </div>
                 <a
                   href={project.url}
