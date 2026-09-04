@@ -1,5 +1,16 @@
 export type Locale = 'en' | 'zh'
 
+export type Post = {
+  slug: string
+  title: Record<Locale, string>
+  date: Record<Locale, string>
+  dateTime: string
+  category: Record<Locale, string>
+  readingTime: Record<Locale, string>
+  locales: Locale[]
+  excerpt: Record<Locale, string>
+}
+
 export const owner = {
   name: 'Mary',
   handle: 'snikmas',
@@ -111,15 +122,52 @@ export const toolkit = [
   },
 ]
 
-export const posts = [
+export const posts: Post[] = [
+  {
+    slug: 'i-thought-i-was-outside-the-race',
+    title: {
+      en: 'I thought I was outside the race',
+      zh: '我以为内卷和我没关系',
+    },
+    date: {
+      en: 'September 5, 2026',
+      zh: '2026 年 9 月 5 日',
+    },
+    dateTime: '2026-09-05',
+    category: {
+      en: 'Thoughts',
+      zh: '想法',
+    },
+    readingTime: {
+      en: '3 min read',
+      zh: '阅读约 3 分钟',
+    },
+    locales: ['en', 'zh'],
+    excerpt: {
+      en: 'On San Francisco, Shenzhen, 卷, and realizing that you do not have to be inside a race for its pressure to follow you home.',
+      zh: '我以为自己不在旧金山的圈子里，内卷就和我没关系。去了一次深圳后，我发现好像不是这样。',
+    },
+  },
   {
     slug: 'ai-hype-my-thoughts',
-    title: 'AI Hype: My Thoughts',
-    date: 'July 22, 2026',
-    dateZh: '2026 年 7 月 22 日',
-    category: 'Thoughts',
-    readingTime: '4 min read',
-    languages: ['EN'],
+    title: {
+      en: 'AI Hype: My Thoughts',
+      zh: 'AI Hype: My Thoughts',
+    },
+    date: {
+      en: 'July 22, 2026',
+      zh: '2026 年 7 月 22 日',
+    },
+    dateTime: '2026-07-22',
+    category: {
+      en: 'Thoughts',
+      zh: '想法',
+    },
+    readingTime: {
+      en: '4 min read',
+      zh: '阅读约 4 分钟',
+    },
+    locales: ['en'],
     excerpt: {
       en: 'On AI pressure, the fear of falling behind, and choosing to learn and build at your own pace.',
       zh: '写给被 AI 浪潮推着走的人：不用害怕落后，也不用按照别人的速度学习和生活。',

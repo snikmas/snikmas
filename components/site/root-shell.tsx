@@ -15,6 +15,7 @@ export function RootShell({
   return (
     <html
       lang={lang}
+      data-scroll-behavior="smooth"
       className={`bg-background ${geist.variable} ${geistMono.variable}`}
     >
       <body className="antialiased font-sans">

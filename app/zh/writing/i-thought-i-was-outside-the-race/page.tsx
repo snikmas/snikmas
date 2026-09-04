@@ -1,0 +1,72 @@
+import type { Metadata } from 'next'
+import { ArticleLayout } from '@/components/site/article-layout'
+import { posts } from '@/components/site/data'
+
+const post = posts.find(({ slug }) => slug === 'i-thought-i-was-outside-the-race')!
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
+const englishPath = `/writing/${post.slug}`
+const chinesePath = `/zh/writing/${post.slug}`
+
+export const metadata: Metadata = {
+  title: `${post.title.zh} — snikmas`,
+  description: post.excerpt.zh,
+  alternates: {
+    canonical: `${basePath}${chinesePath}`,
+    languages: {
+      en: `${basePath}${englishPath}`,
+      'zh-CN': `${basePath}${chinesePath}`,
+    },
+  },
+}
+
+export default function OutsideTheRaceChinesePost() {
+  return (
+    <ArticleLayout
+      locale="zh"
+      title={post.title.zh}
+      date={post.date.zh}
+      dateTime={post.dateTime}
+      category={post.category.zh}
+      readingTime={post.readingTime.zh}
+      alternateHref={englishPath}
+    >
+      <p>
+        我不太刷 Twitter，但我总是在一些关于旧金山的帖子里看到一个很奇怪的想法：未来在那里，而且一切都越来越快。进入那个未来的机会也一直在变少。如果你不在那里……那你大概已经完蛋了吧，跟不上那边的人。
+      </p>
+
+      <p>
+        后来我读了 George Hotz 的文章{' '}
+        <a href="https://geohot.github.io/blog/jekyll/update/2026/07/12/i-love-llms.html">
+          I love LLMs, I hate hype
+        </a>
+        。他把这种东西叫作“negative valence hype”，就是一种让人觉得自己已经落后的炒作。我当时想：对嘛，我的感觉没错。我又不在旧金山的科技圈里。在中国，我也做不了什么，而且其实也不需要做什么。嗯，很好，这种焦虑和我没关系吧。
+      </p>
+
+      <p>结果……好像也不是？</p>
+
+      <p>
+        中国也有这种压力：卷。大家越来越努力，标准也越来越高，但是谁都没有真正领先。很多人不能直接退出这场竞争，因为他们需要工作，也不是每个人都有足够的钱或其他选择，能让自己慢下来。但就算有选择，很多人也已经把内卷当成生活本来就有的一部分。
+      </p>
+
+      <p>
+        因为我是外国人吧，我以前觉得自己可以站在旁边看。我走的路和中国学生不一样，所以我觉得自己不需要参加这场竞争，也不会真的被卷进去。我只要做自己该做的事，按自己的速度走就好了。听起来很合理。
+      </p>
+
+      <p>
+        后来我去深圳参加了一次黑客松。对我来说，深圳有一点像中国的旧金山。我遇到的队友和我年龄差不多，但他们已经参加过很多科技活动，也更早接触到行业里的新东西。他们有自己的目标，而这个城市也真的有机会让他们去做这些事。我当时一直在想：这里的机会真的很多。好像只要走出门，机会就会找到你。我很喜欢这种感觉，以后也希望有机会去那儿工作。
+      </p>
+
+      <p>
+        然后灰姑娘回郑州了。对，灰姑娘就是我。回到郑州后，我突然觉得，平时的生活里好像什么都没有发生。我在浪费时间。我不在对的城市，也不在对的圈子里，所以必须更努力、更快一点，把这些差距补回来。郑州没有人在直接和我竞争。这也不重要。因为那种气氛已经跟着我回来了。
+      </p>
+
+      <p>
+        这就是我之前没有发现的地方。我一直觉得内卷是别人的问题，最后才发现，我也开始这样要求自己了。看来，就算你没有参加同一场竞争，它的压力还是会影响你。也许这就是为什么我们常常意识不到，自己其实已经开始跑了。我们说“这就是内卷”，好像给它起了一个名字，就已经解释了一切。它变成了环境强加给我们的东西，而我们觉得自己只能继续跑，因为别人都已经开始跑了。
+      </p>
+
+      <p>
+        所以……不要只是因为大家都在跑，就跟着一起跑。如果你想跑，那就跑呗。只是要先确定，目标是你自己的，然后按照自己的速度跑。如果你说不清自己为什么要做这件事，那可能就应该先停一下，想想自己是为了什么参加这场比赛。
+      </p>
+    </ArticleLayout>
+  )
+}

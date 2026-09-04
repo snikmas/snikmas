@@ -2,20 +2,22 @@ import type { Metadata } from 'next'
 import { ArticleLayout } from '@/components/site/article-layout'
 import { posts } from '@/components/site/data'
 
-const post = posts[0]
+const post = posts.find(({ slug }) => slug === 'ai-hype-my-thoughts')!
 
 export const metadata: Metadata = {
-  title: `${post.title} — snikmas`,
+  title: `${post.title.en} — snikmas`,
   description: post.excerpt.en,
 }
 
 export default function AiHypeThoughtsPost() {
   return (
     <ArticleLayout
-      title={post.title}
-      date={post.date}
-      category={post.category}
-      readingTime={post.readingTime}
+      locale="en"
+      title={post.title.en}
+      date={post.date.en}
+      dateTime={post.dateTime}
+      category={post.category.en}
+      readingTime={post.readingTime.en}
     >
       <p>
         The AI hype is hard to miss—and so is the pressure around it. New models

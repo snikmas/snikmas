@@ -44,6 +44,7 @@ export function HomePage({ locale }: { locale: Locale }) {
   const copy = siteCopy[locale]
   const isChinese = locale === 'zh'
   const alternateHref = isChinese ? '/' : '/zh'
+  const writingHref = isChinese ? '/zh/writing' : '/writing'
   const links = isChinese
     ? [...socialLinks.slice(0, 3), rednoteLink, ...socialLinks.slice(3)]
     : socialLinks
@@ -61,7 +62,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             <nav aria-label={isChinese ? '页面导航' : 'Page sections'} className="hidden items-center gap-5 text-sm text-muted-foreground sm:flex">
               <a href="#toolkit" className="nav-link">{copy.nav.toolkit}</a>
               <a href="#projects" className="nav-link">{copy.nav.projects}</a>
-              <Link href="/writing" className="nav-link">{copy.nav.writing}</Link>
+              <Link href={writingHref} className="nav-link">{copy.nav.writing}</Link>
             </nav>
 
             <Link
@@ -161,24 +162,33 @@ export function HomePage({ locale }: { locale: Locale }) {
         </Section>
 
         <Section id="writing" label={copy.writingLabel}>
-          {posts.slice(0, 3).map((post) => (
-            <article key={post.slug} className="group max-w-2xl">
-              <p className="text-sm text-muted-foreground">
-                {isChinese ? post.dateZh : post.date}
-                <span aria-hidden="true"> · </span>
-                {post.languages.join(' · ')}
-              </p>
-              <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-                <Link href={`/writing/${post.slug}`} className="title-link inline-flex min-h-11 items-center gap-2">
-                  {post.title}
-                  <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
-                </Link>
-              </h3>
-              <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt[locale]}</p>
-            </article>
-          ))}
+          <div className="space-y-10">
+            {posts.slice(0, 3).map((post) => {
+              const articleLocale = post.locales.includes(locale) ? locale : 'en'
+              const articleHref = articleLocale === 'zh'
+                ? `/zh/writing/${post.slug}`
+                : `/writing/${post.slug}`
+
+              return (
+                <article key={post.slug} className="group max-w-2xl">
+                  <p className="text-sm text-muted-foreground">
+                    {post.date[locale]}
+                    <span aria-hidden="true"> · </span>
+                    {post.locales.map((postLocale) => postLocale === 'en' ? 'EN' : '中文').join(' · ')}
+                  </p>
+                  <h3 className="mt-2 text-2xl font-semibold tracking-tight">
+                    <Link href={articleHref} className="title-link inline-flex min-h-11 items-center gap-2">
+                      {post.title[articleLocale]}
+                      <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
+                    </Link>
+                  </h3>
+                  <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt[locale]}</p>
+                </article>
+              )
+            })}
+          </div>
           <Link
-            href="/writing"
+            href={writingHref}
             className="title-link mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium"
           >
             {copy.allWriting}

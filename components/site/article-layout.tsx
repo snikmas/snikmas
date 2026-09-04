@@ -1,34 +1,56 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import type { Locale } from './data'
 
 type ArticleLayoutProps = {
+  locale: Locale
   title: string
   date: string
+  dateTime: string
   category: string
   readingTime: string
+  alternateHref?: string
   children: ReactNode
 }
 
 export function ArticleLayout({
+  locale,
   title,
   date,
+  dateTime,
   category,
   readingTime,
+  alternateHref,
   children,
 }: ArticleLayoutProps) {
+  const isChinese = locale === 'zh'
+  const homeHref = isChinese ? '/zh' : '/'
+  const writingHref = isChinese ? '/zh/writing' : '/writing'
+
   return (
-    <div className="dir-journal min-h-svh bg-background text-foreground">
+    <div className="dir-journal min-h-svh bg-background text-foreground" lang={isChinese ? 'zh-CN' : 'en'}>
       <header className="border-b border-border">
-        <div className="mx-auto flex w-full max-w-3xl items-baseline justify-between gap-6 px-6 py-5 lg:px-10">
-          <Link href="/" className="text-sm font-medium transition-colors hover:text-accent">
+        <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-5 px-6 py-5 lg:px-10">
+          <Link href={homeHref} className="text-sm font-medium transition-colors hover:text-accent">
             Mary / snikmas
           </Link>
-          <Link
-            href="/writing"
-            className="text-xs text-muted-foreground transition-colors hover:text-accent"
-          >
-            ← all writing
-          </Link>
+          <div className="flex items-center gap-4">
+            {alternateHref ? (
+              <Link
+                href={alternateHref}
+                hrefLang={isChinese ? 'en' : 'zh-CN'}
+                className="text-xs font-medium transition-colors hover:text-accent"
+              >
+                {isChinese ? 'EN' : '中文'}
+              </Link>
+            ) : null}
+            <Link
+              href={writingHref}
+              className="text-xs text-muted-foreground transition-colors hover:text-accent"
+            >
+              {isChinese ? '← 所有文章' : '← all writing'}
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -42,7 +64,7 @@ export function ArticleLayout({
               {title}
             </h1>
             <p className="mt-6 text-xs text-muted-foreground">
-              <time dateTime="2026-07-22">{date}</time> · {readingTime}
+              <time dateTime={dateTime}>{date}</time> · {readingTime}
             </p>
           </header>
 
@@ -50,8 +72,8 @@ export function ArticleLayout({
         </article>
 
         <footer className="mt-20 border-t border-border pt-6 text-xs text-muted-foreground">
-          <Link href="/writing" className="transition-colors hover:text-accent">
-            ← Back to writing
+          <Link href={writingHref} className="transition-colors hover:text-accent">
+            {isChinese ? '← 返回文章列表' : '← Back to writing'}
           </Link>
         </footer>
       </main>

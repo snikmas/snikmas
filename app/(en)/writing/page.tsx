@@ -42,13 +42,13 @@ export default function WritingIndexPage() {
           {posts.map((post) => (
             <article key={post.slug} className="project-row px-3 py-7">
               <p className="text-sm text-muted-foreground">
-                <time>{post.date}</time>
+                <time dateTime={post.dateTime}>{post.date.en}</time>
                 <span aria-hidden="true"> · </span>
-                {post.readingTime}
+                {post.readingTime.en}
               </p>
               <h2 className="mt-2 text-2xl font-semibold tracking-tight">
                 <Link href={`/writing/${post.slug}`} className="title-link inline-flex min-h-11 items-center gap-2">
-                  {post.title}
+                  {post.title.en}
                   <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
                 </Link>
               </h2>
