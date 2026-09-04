@@ -111,22 +111,31 @@ export function HomePage({ locale }: { locale: Locale }) {
         </section>
 
         <Section id="writing" label={copy.writingLabel}>
-          {posts.map((post) => (
-            <article key={post.slug} className="group max-w-2xl">
-              <p className="text-sm text-muted-foreground">
-                {isChinese ? post.dateZh : post.date}
-                <span aria-hidden="true"> · </span>
-                {copy.articleLanguage}
-              </p>
-              <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-                <Link href={`/writing/${post.slug}`} className="title-link inline-flex min-h-11 items-center gap-2">
-                  {post.title}
-                  <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
-                </Link>
-              </h3>
-              <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt[locale]}</p>
-            </article>
-          ))}
+          <div className="space-y-10">
+            {posts.map((post) => {
+              const articleLocale = post.locales.includes(locale) ? locale : 'en'
+              const articleHref = articleLocale === 'zh'
+                ? `/zh/writing/${post.slug}`
+                : `/writing/${post.slug}`
+
+              return (
+                <article key={post.slug} className="group max-w-2xl">
+                  <p className="text-sm text-muted-foreground">
+                    {isChinese ? post.dateZh : post.date}
+                    <span aria-hidden="true"> · </span>
+                    {copy.articleLanguage[articleLocale]}
+                  </p>
+                  <h3 className="mt-2 text-2xl font-semibold tracking-tight">
+                    <Link href={articleHref} className="title-link inline-flex min-h-11 items-center gap-2">
+                      {post.title[articleLocale]}
+                      <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
+                    </Link>
+                  </h3>
+                  <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt[locale]}</p>
+                </article>
+              )
+            })}
+          </div>
         </Section>
 
         <Section id="projects" label={copy.projectsLabel}>

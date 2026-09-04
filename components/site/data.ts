@@ -1,5 +1,7 @@
 export type Locale = 'en' | 'zh'
 
+export const siteUrl = 'https://snikmas.github.io/snikmas'
+
 export const owner = {
   name: 'Mary',
   handle: 'snikmas',
@@ -28,7 +30,10 @@ export const siteCopy = {
     toolkitLabel: 'Working toolkit',
     toolkitNote: 'The tools behind the projects above. I list what I use, not every library I have opened once.',
     openProject: 'Open project',
-    articleLanguage: 'English article',
+    articleLanguage: {
+      en: 'English article',
+      zh: 'Chinese article',
+    },
   },
   zh: {
     localeName: '中文',
@@ -49,7 +54,10 @@ export const siteCopy = {
     toolkitLabel: '常用技术',
     toolkitNote: '这些技术都用在上面的项目里。我只列常用的，不把碰过一次的库也塞进来。',
     openProject: '查看项目',
-    articleLanguage: '英文文章',
+    articleLanguage: {
+      en: '英文文章',
+      zh: '中文文章',
+    },
   },
 } satisfies Record<Locale, object>
 
@@ -110,12 +118,46 @@ export const toolkit = [
 
 export const posts = [
   {
+    slug: 'i-thought-i-was-outside-the-race',
+    title: {
+      en: 'I thought I was outside the race',
+      zh: '我以为内卷和我没关系',
+    },
+    date: 'September 5, 2026',
+    dateZh: '2026 年 9 月 5 日',
+    dateTime: '2026-09-05',
+    category: {
+      en: 'Thoughts',
+      zh: '想法',
+    },
+    readingTime: {
+      en: '3 min read',
+      zh: '阅读约 3 分钟',
+    },
+    locales: ['en', 'zh'] as Locale[],
+    excerpt: {
+      en: 'On San Francisco, Shenzhen, 卷, and realizing that you do not have to be inside a race for its pressure to follow you home.',
+      zh: '我以为自己不在旧金山的圈子里，内卷就和我没关系。去了一次深圳后，我发现好像不是这样。',
+    },
+  },
+  {
     slug: 'ai-hype-my-thoughts',
-    title: 'AI Hype: My Thoughts',
+    title: {
+      en: 'AI Hype: My Thoughts',
+      zh: 'AI Hype: My Thoughts',
+    },
     date: 'July 22, 2026',
     dateZh: '2026 年 7 月 22 日',
-    category: 'Thoughts',
-    readingTime: '4 min read',
+    dateTime: '2026-07-22',
+    category: {
+      en: 'Thoughts',
+      zh: '想法',
+    },
+    readingTime: {
+      en: '4 min read',
+      zh: '阅读约 4 分钟',
+    },
+    locales: ['en'] as Locale[],
     excerpt: {
       en: 'On AI pressure, the fear of falling behind, and choosing to learn and build at your own pace.',
       zh: '写给被 AI 浪潮推着走的人：不用害怕落后，也不用按照别人的速度学习和生活。',
