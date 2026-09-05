@@ -29,6 +29,7 @@ export const siteCopy = {
     projectsNote: 'Three projects I currently keep pinned on GitHub. I care more about the problem and the engineering choices than a long list of tools.',
     toolkitLabel: 'Working toolkit',
     toolkitNote: 'The tools behind the projects above. I list what I use, not every library I have opened once.',
+    readMore: 'Read more',
     openProject: 'Open project',
     articleLanguage: {
       en: 'English article',
@@ -53,6 +54,7 @@ export const siteCopy = {
     projectsNote: '这里放三个目前置顶在 GitHub 的项目。我更想说明它们解决了什么问题，以及我如何实现它们，而不是只列技术栈。',
     toolkitLabel: '常用技术',
     toolkitNote: '这些技术都用在上面的项目里。我只列常用的，不把碰过一次的库也塞进来。',
+    readMore: '阅读全文',
     openProject: '查看项目',
     articleLanguage: {
       en: '英文文章',
