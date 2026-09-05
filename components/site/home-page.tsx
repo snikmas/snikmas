@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight, AtSign, BookOpen, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
 import { type Locale, owner, posts, type Project, siteCopy, toolkit } from './data'
+import { SiteHeader } from './site-header'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
@@ -43,41 +44,15 @@ function Section({
 export function HomePage({ locale, projects }: { locale: Locale; projects: Project[] }) {
   const copy = siteCopy[locale]
   const isChinese = locale === 'zh'
-  const alternateHref = isChinese ? '/' : '/zh'
   const writingHref = isChinese ? '/zh/writing' : '/writing'
+  const readMore = isChinese ? '阅读全文' : 'Read more'
   const links = isChinese
     ? [...socialLinks.slice(0, 3), rednoteLink, ...socialLinks.slice(3)]
     : socialLinks
 
   return (
     <div className="dir-journal min-h-svh bg-background text-foreground" lang={copy.htmlLang}>
-      <header className="sticky top-0 z-40 border-b border-border/80 bg-background/88 backdrop-blur-md">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-6 px-6 py-3.5 lg:px-10">
-          <a href="#about" className="flex min-h-11 items-center gap-2" aria-label="Mary, home">
-            <span className="font-semibold tracking-tight">{owner.name}</span>
-            <span className="text-sm text-muted-foreground">@{owner.handle}</span>
-          </a>
-
-          <div className="flex items-center gap-5">
-            <nav aria-label={isChinese ? '页面导航' : 'Page sections'} className="hidden items-center gap-5 text-sm text-muted-foreground sm:flex">
-              <a href="#toolkit" className="nav-link">{copy.nav.toolkit}</a>
-              <a href="#projects" className="nav-link">{copy.nav.projects}</a>
-              <Link href={writingHref} className="nav-link">{copy.nav.writing}</Link>
-            </nav>
-
-            <Link
-              href={alternateHref}
-              hrefLang={isChinese ? 'en' : 'zh-CN'}
-              className="language-switch inline-flex min-h-11 items-center gap-2 whitespace-nowrap px-1 text-xs font-medium"
-              aria-label={isChinese ? 'Switch to English' : '切换到中文'}
-            >
-              <span className={isChinese ? 'text-muted-foreground' : 'text-foreground'}>EN</span>
-              <span aria-hidden="true" className="text-border">/</span>
-              <span className={isChinese ? 'text-foreground' : 'text-muted-foreground'}>中文</span>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SiteHeader locale={locale} />
 
       <main className="mx-auto w-full max-w-5xl px-6 pb-20 lg:px-10">
         <section id="about" className="scroll-mt-24 pt-10 md:pt-14">
@@ -166,7 +141,7 @@ export function HomePage({ locale, projects }: { locale: Locale; projects: Proje
         </Section>
 
         <Section id="writing" label={copy.writingLabel}>
-          <div className="space-y-10">
+          <div className="divide-y divide-border">
             {posts.slice(0, 3).map((post) => {
               const articleLocale = post.locales.includes(locale) ? locale : 'en'
               const articleHref = articleLocale === 'zh'
@@ -174,19 +149,26 @@ export function HomePage({ locale, projects }: { locale: Locale; projects: Proje
                 : `/writing/${post.slug}`
 
               return (
-                <article key={post.slug} className="group max-w-2xl">
+                <article key={post.slug} className="group max-w-2xl py-8 first:pt-0 last:pb-0">
                   <p className="text-sm text-muted-foreground">
-                    {post.date[locale]}
+                    <time dateTime={post.dateTime}>{post.date[locale]}</time>
                     <span aria-hidden="true"> · </span>
                     {post.locales.map((postLocale) => postLocale === 'en' ? 'EN' : '中文').join(' · ')}
                   </p>
                   <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-                    <Link href={articleHref} className="title-link inline-flex min-h-11 items-center gap-2">
+                    <Link href={articleHref} className="title-link inline-flex min-h-11 items-center">
                       {post.title[articleLocale]}
-                      <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
                     </Link>
                   </h3>
                   <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt[locale]}</p>
+                  <Link
+                    href={articleHref}
+                    className="title-link mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-medium"
+                    aria-label={`${readMore}: ${post.title[articleLocale]}`}
+                  >
+                    {readMore}
+                    <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
+                  </Link>
                 </article>
               )
             })}

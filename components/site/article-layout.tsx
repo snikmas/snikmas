@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import type { Locale } from './data'
+import { SiteHeader } from './site-header'
 
 type ArticleLayoutProps = {
   locale: Locale
@@ -24,35 +25,11 @@ export function ArticleLayout({
   children,
 }: ArticleLayoutProps) {
   const isChinese = locale === 'zh'
-  const homeHref = isChinese ? '/zh' : '/'
   const writingHref = isChinese ? '/zh/writing' : '/writing'
 
   return (
     <div className="dir-journal min-h-svh bg-background text-foreground" lang={isChinese ? 'zh-CN' : 'en'}>
-      <header className="border-b border-border">
-        <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-5 px-6 py-5 lg:px-10">
-          <Link href={homeHref} className="text-sm font-medium transition-colors hover:text-accent">
-            Mary / snikmas
-          </Link>
-          <div className="flex items-center gap-4">
-            {alternateHref ? (
-              <Link
-                href={alternateHref}
-                hrefLang={isChinese ? 'en' : 'zh-CN'}
-                className="text-xs font-medium transition-colors hover:text-accent"
-              >
-                {isChinese ? 'EN' : '中文'}
-              </Link>
-            ) : null}
-            <Link
-              href={writingHref}
-              className="text-xs text-muted-foreground transition-colors hover:text-accent"
-            >
-              {isChinese ? '← 所有文章' : '← all writing'}
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SiteHeader locale={locale} alternateHref={alternateHref} />
 
       <main className="mx-auto w-full max-w-3xl px-6 pb-28 pt-20 lg:px-10 lg:pt-28">
         <article>
