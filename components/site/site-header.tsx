@@ -11,6 +11,7 @@ export function SiteHeader({
   const copy = siteCopy[locale]
   const isChinese = locale === 'zh'
   const homeHref = isChinese ? '/zh' : '/'
+  const writingHref = isChinese ? '/zh/writing' : '/writing'
   const languageHref = alternateHref ?? (isChinese ? '/' : '/zh')
 
   return (
@@ -30,14 +31,14 @@ export function SiteHeader({
             aria-label={isChinese ? '页面导航' : 'Page sections'}
             className="hidden items-center gap-5 text-sm text-muted-foreground sm:flex"
           >
-            <Link href={`${homeHref}#writing`} className="nav-link">
-              {copy.nav.writing}
+            <Link href={`${homeHref}#toolkit`} className="nav-link">
+              {copy.nav.toolkit}
             </Link>
             <Link href={`${homeHref}#projects`} className="nav-link">
               {copy.nav.projects}
             </Link>
-            <Link href={`${homeHref}#toolkit`} className="nav-link">
-              {copy.nav.toolkit}
+            <Link href={writingHref} className="nav-link">
+              {copy.nav.writing}
             </Link>
           </nav>
 

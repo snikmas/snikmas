@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { posts } from '@/components/site/data'
+import { SiteHeader } from '@/components/site/site-header'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
@@ -17,19 +18,7 @@ export const metadata: Metadata = {
 export default function WritingIndexPage() {
   return (
     <div className="dir-journal min-h-svh bg-background text-foreground">
-      <header className="border-b border-border">
-        <div className="mx-auto flex w-full max-w-3xl items-baseline justify-between gap-6 px-6 py-5 lg:px-10">
-          <Link href="/" className="text-sm font-medium transition-colors hover:text-accent">
-            Mary / snikmas
-          </Link>
-          <Link
-            href="/"
-            className="text-xs text-muted-foreground transition-colors hover:text-accent"
-          >
-            ← home
-          </Link>
-        </div>
-      </header>
+      <SiteHeader locale="en" alternateHref="/zh/writing" />
 
       <main className="mx-auto w-full max-w-3xl px-6 pb-28 pt-16 lg:px-10 lg:pt-24">
         <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Writing</h1>
@@ -47,12 +36,19 @@ export default function WritingIndexPage() {
                 {post.readingTime.en}
               </p>
               <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-                <Link href={`/writing/${post.slug}`} className="title-link inline-flex min-h-11 items-center gap-2">
+                <Link href={`/writing/${post.slug}`} className="title-link inline-flex min-h-11 items-center">
                   {post.title.en}
-                  <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
                 </Link>
               </h2>
               <p className="mt-3 max-w-2xl leading-7 text-muted-foreground">{post.excerpt.en}</p>
+              <Link
+                href={`/writing/${post.slug}`}
+                className="title-link mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-medium"
+                aria-label={`Read more: ${post.title.en}`}
+              >
+                Read more
+                <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
+              </Link>
             </article>
           ))}
         </div>
