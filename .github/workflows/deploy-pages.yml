@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
 
 permissions:
   contents: read
@@ -44,6 +46,7 @@ jobs:
       - name: Build static site
         run: pnpm build
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEXT_PUBLIC_BASE_PATH: /snikmas
 
       - name: Upload Pages artifact

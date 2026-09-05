@@ -1,21 +1,20 @@
 import type { Metadata } from 'next'
 import { ArticleLayout } from '@/components/site/article-layout'
-import { posts, siteUrl } from '@/components/site/data'
+import { posts } from '@/components/site/data'
 
 const post = posts.find(({ slug }) => slug === 'i-thought-i-was-outside-the-race')!
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 const englishPath = `/writing/${post.slug}`
 const chinesePath = `/zh/writing/${post.slug}`
-const englishUrl = `${siteUrl}${englishPath}/`
-const chineseUrl = `${siteUrl}${chinesePath}/`
 
 export const metadata: Metadata = {
-  title: `${post.title.en} | Mary (snikmas)`,
+  title: `${post.title.en} — snikmas`,
   description: post.excerpt.en,
   alternates: {
-    canonical: englishUrl,
+    canonical: `${basePath}${englishPath}`,
     languages: {
-      en: englishUrl,
-      'zh-CN': chineseUrl,
+      en: `${basePath}${englishPath}`,
+      'zh-CN': `${basePath}${chinesePath}`,
     },
   },
 }
@@ -25,7 +24,7 @@ export default function OutsideTheRacePost() {
     <ArticleLayout
       locale="en"
       title={post.title.en}
-      date={post.date}
+      date={post.date.en}
       dateTime={post.dateTime}
       category={post.category.en}
       readingTime={post.readingTime.en}

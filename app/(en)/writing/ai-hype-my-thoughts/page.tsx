@@ -1,19 +1,12 @@
 import type { Metadata } from 'next'
 import { ArticleLayout } from '@/components/site/article-layout'
-import { posts, siteUrl } from '@/components/site/data'
+import { posts } from '@/components/site/data'
 
 const post = posts.find(({ slug }) => slug === 'ai-hype-my-thoughts')!
-const articleUrl = `${siteUrl}/writing/${post.slug}/`
 
 export const metadata: Metadata = {
-  title: `${post.title.en} | Mary (snikmas)`,
+  title: `${post.title.en} — snikmas`,
   description: post.excerpt.en,
-  alternates: {
-    canonical: articleUrl,
-    languages: {
-      en: articleUrl,
-    },
-  },
 }
 
 export default function AiHypeThoughtsPost() {
@@ -21,7 +14,7 @@ export default function AiHypeThoughtsPost() {
     <ArticleLayout
       locale="en"
       title={post.title.en}
-      date={post.date}
+      date={post.date.en}
       dateTime={post.dateTime}
       category={post.category.en}
       readingTime={post.readingTime.en}

@@ -1,16 +1,22 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
-import { type Locale, owner, posts, projects, siteCopy, toolkit } from './data'
-import { SiteHeader } from './site-header'
+import { ArrowUpRight, AtSign, BookOpen, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
+import { type Locale, owner, posts, type Project, siteCopy, toolkit } from './data'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
 const socialLinks = [
   { label: 'GitHub', href: owner.github, icon: Code2 },
   { label: 'LinkedIn', href: owner.linkedin, icon: BriefcaseBusiness },
+  { label: 'X', href: owner.x, icon: AtSign },
   { label: 'Email', href: `mailto:${owner.email}`, icon: Mail },
 ]
+
+const rednoteLink = {
+  label: '小红书',
+  href: `https://www.xiaohongshu.com/search_result?keyword=${owner.rednote}`,
+  icon: BookOpen,
+}
 
 function Section({
   id,
@@ -34,13 +40,44 @@ function Section({
   )
 }
 
-export function HomePage({ locale }: { locale: Locale }) {
+export function HomePage({ locale, projects }: { locale: Locale; projects: Project[] }) {
   const copy = siteCopy[locale]
   const isChinese = locale === 'zh'
+  const alternateHref = isChinese ? '/' : '/zh'
+  const writingHref = isChinese ? '/zh/writing' : '/writing'
+  const links = isChinese
+    ? [...socialLinks.slice(0, 3), rednoteLink, ...socialLinks.slice(3)]
+    : socialLinks
 
   return (
     <div className="dir-journal min-h-svh bg-background text-foreground" lang={copy.htmlLang}>
-      <SiteHeader locale={locale} />
+      <header className="sticky top-0 z-40 border-b border-border/80 bg-background/88 backdrop-blur-md">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-6 px-6 py-3.5 lg:px-10">
+          <a href="#about" className="flex min-h-11 items-center gap-2" aria-label="Mary, home">
+            <span className="font-semibold tracking-tight">{owner.name}</span>
+            <span className="text-sm text-muted-foreground">@{owner.handle}</span>
+          </a>
+
+          <div className="flex items-center gap-5">
+            <nav aria-label={isChinese ? '页面导航' : 'Page sections'} className="hidden items-center gap-5 text-sm text-muted-foreground sm:flex">
+              <a href="#toolkit" className="nav-link">{copy.nav.toolkit}</a>
+              <a href="#projects" className="nav-link">{copy.nav.projects}</a>
+              <Link href={writingHref} className="nav-link">{copy.nav.writing}</Link>
+            </nav>
+
+            <Link
+              href={alternateHref}
+              hrefLang={isChinese ? 'en' : 'zh-CN'}
+              className="language-switch inline-flex min-h-11 items-center gap-2 whitespace-nowrap px-1 text-xs font-medium"
+              aria-label={isChinese ? 'Switch to English' : '切换到中文'}
+            >
+              <span className={isChinese ? 'text-muted-foreground' : 'text-foreground'}>EN</span>
+              <span aria-hidden="true" className="text-border">/</span>
+              <span className={isChinese ? 'text-foreground' : 'text-muted-foreground'}>中文</span>
+            </Link>
+          </div>
+        </div>
+      </header>
 
       <main className="mx-auto w-full max-w-5xl px-6 pb-20 lg:px-10">
         <section id="about" className="scroll-mt-24 pt-10 md:pt-14">
@@ -54,7 +91,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               <p className="mt-3 max-w-xl leading-7 text-muted-foreground">{copy.note}</p>
 
               <div className="mt-7 flex flex-wrap items-center gap-2" aria-label={copy.socialLabel}>
-                {socialLinks.map(({ label, href, icon: Icon }) => (
+                {links.map(({ label, href, icon: Icon }) => (
                   <a
                     key={label}
                     href={href}
@@ -84,53 +121,34 @@ export function HomePage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <Section id="writing" label={copy.writingLabel}>
-          <div className="divide-y divide-border">
-            {posts.map((post) => {
-              const articleLocale = post.locales.includes(locale) ? locale : 'en'
-              const articleHref = articleLocale === 'zh'
-                ? `/zh/writing/${post.slug}`
-                : `/writing/${post.slug}`
-
-              return (
-                <article key={post.slug} className="group max-w-2xl py-8 first:pt-0 last:pb-0">
-                  <p className="text-sm text-muted-foreground">
-                    <time dateTime={post.dateTime}>{isChinese ? post.dateZh : post.date}</time>
-                    <span aria-hidden="true"> · </span>
-                    {copy.articleLanguage[articleLocale]}
-                  </p>
-                  <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-                    <Link href={articleHref} className="title-link inline-flex min-h-11 items-center">
-                      {post.title[articleLocale]}
-                    </Link>
-                  </h3>
-                  <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt[locale]}</p>
-                  <Link
-                    href={articleHref}
-                    className="title-link mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-medium"
-                    aria-label={`${copy.readMore}: ${post.title[articleLocale]}`}
-                  >
-                    {copy.readMore}
-                    <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
-                  </Link>
-                </article>
-              )
-            })}
-          </div>
+        <Section id="toolkit" label={copy.toolkitLabel}>
+          <p className="mb-8 max-w-2xl leading-7 text-muted-foreground">{copy.toolkitNote}</p>
+          <dl className="grid gap-x-10 gap-y-7 sm:grid-cols-2">
+            {toolkit.map((group) => (
+              <div key={group.label.en}>
+                <dt className="text-sm font-medium">{group.label[locale]}</dt>
+                <dd className="mt-2 leading-7 text-muted-foreground">{group.items.join(', ')}</dd>
+              </div>
+            ))}
+          </dl>
         </Section>
 
         <Section id="projects" label={copy.projectsLabel}>
           <p className="mb-8 max-w-2xl leading-7 text-muted-foreground">{copy.projectsNote}</p>
-          <div className="divide-y divide-border border-y border-border">
+          <div className="-mx-3 divide-y divide-border border-y border-border">
             {projects.map((project, index) => (
-              <article key={project.slug} className="project-row grid gap-3 py-6 sm:grid-cols-[2.25rem_1fr_auto] sm:gap-5">
+              <article key={project.slug} className="project-row grid gap-3 px-3 py-6 sm:grid-cols-[2.25rem_1fr_auto] sm:gap-5">
                 <span className="project-number pt-1 text-xs text-muted-foreground" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <div>
                   <h3 className="text-lg font-semibold tracking-tight">{project.name}</h3>
-                  <p className="mt-1.5 max-w-2xl leading-7 text-muted-foreground">{project.summary[locale]}</p>
-                  <p className="mt-3 text-xs text-muted-foreground">{project.stack.join(' · ')}</p>
+                  {project.description && (
+                    <p className="mt-1.5 max-w-2xl leading-7 text-muted-foreground">{project.description}</p>
+                  )}
+                  {project.languages.length > 0 && (
+                    <p className="mt-3 text-xs text-muted-foreground">{project.languages.join(' · ')}</p>
+                  )}
                 </div>
                 <a
                   href={project.url}
@@ -147,16 +165,39 @@ export function HomePage({ locale }: { locale: Locale }) {
           </div>
         </Section>
 
-        <Section id="toolkit" label={copy.toolkitLabel}>
-          <p className="mb-8 max-w-2xl leading-7 text-muted-foreground">{copy.toolkitNote}</p>
-          <dl className="grid gap-x-10 gap-y-7 sm:grid-cols-2">
-            {toolkit.map((group) => (
-              <div key={group.label.en}>
-                <dt className="text-sm font-medium">{group.label[locale]}</dt>
-                <dd className="mt-2 leading-7 text-muted-foreground">{group.items.join(', ')}</dd>
-              </div>
-            ))}
-          </dl>
+        <Section id="writing" label={copy.writingLabel}>
+          <div className="space-y-10">
+            {posts.slice(0, 3).map((post) => {
+              const articleLocale = post.locales.includes(locale) ? locale : 'en'
+              const articleHref = articleLocale === 'zh'
+                ? `/zh/writing/${post.slug}`
+                : `/writing/${post.slug}`
+
+              return (
+                <article key={post.slug} className="group max-w-2xl">
+                  <p className="text-sm text-muted-foreground">
+                    {post.date[locale]}
+                    <span aria-hidden="true"> · </span>
+                    {post.locales.map((postLocale) => postLocale === 'en' ? 'EN' : '中文').join(' · ')}
+                  </p>
+                  <h3 className="mt-2 text-2xl font-semibold tracking-tight">
+                    <Link href={articleHref} className="title-link inline-flex min-h-11 items-center gap-2">
+                      {post.title[articleLocale]}
+                      <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" />
+                    </Link>
+                  </h3>
+                  <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt[locale]}</p>
+                </article>
+              )
+            })}
+          </div>
+          <Link
+            href={writingHref}
+            className="title-link mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium"
+          >
+            {copy.allWriting}
+            <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
+          </Link>
         </Section>
 
         <footer className="border-t border-border py-6 text-sm text-muted-foreground">

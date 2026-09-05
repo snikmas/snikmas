@@ -6,9 +6,10 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
 export const metadata: Metadata = {
   title: 'snikmas',
-  description: 'Mary 在这里记录后端开发、AI、读书和中俄生活，也介绍她用 Python 完成的软件项目。',
+  description:
+    'Mary writes about backend engineering, AI, books, and life between Russia and China. She also shares selected Python projects.',
   alternates: {
-    canonical: `${basePath}/zh`,
+    canonical: `${basePath}/`,
     languages: {
       en: `${basePath}/`,
       'zh-CN': `${basePath}/zh`,
@@ -16,8 +17,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function ChineseHomePage() {
+export default async function EnglishHomePage() {
   const projects = await getPinnedProjects()
 
-  return <HomePage locale="zh" projects={projects} />
+  return <HomePage locale="en" projects={projects} />
 }
