@@ -1,16 +1,5 @@
 export type Locale = 'en' | 'zh'
 
-export type Post = {
-  slug: string
-  title: Record<Locale, string>
-  date: Record<Locale, string>
-  dateTime: string
-  category: Record<Locale, string>
-  readingTime: Record<Locale, string>
-  locales: Locale[]
-  excerpt: Record<Locale, string>
-}
-
 export const owner = {
   name: 'Mary',
   handle: 'snikmas',
@@ -42,6 +31,17 @@ export const siteCopy = {
     toolkitNote: "What I reach for when something needs to ship. If it's here, it's been in one of my projects.",
     openProject: 'Open project',
     allWriting: 'All writing',
+    readMore: 'Read more',
+    writingIndex: {
+      title: 'Writing',
+      description:
+        'Notes on programming, AI, books, and life between Russia and China.',
+      intro:
+        'Project notes, questions I am still working through, and thoughts on programming, AI, books, and life between Russia and China.',
+      empty: 'Nothing here yet.',
+      allWritingShort: 'all writing',
+      backToWriting: 'Back to writing',
+    },
   },
   zh: {
     localeName: '中文',
@@ -63,8 +63,17 @@ export const siteCopy = {
     toolkitNote: '真正要交付项目时我会用的东西。列在这里的，都在我自己的项目里跑过。',
     openProject: '查看项目',
     allWriting: '全部文章',
+    readMore: '阅读全文',
+    writingIndex: {
+      title: '文章',
+      description: '关于编程、AI、读书和中俄生活的记录。',
+      intro: '这里放项目笔记、还没想完的问题，以及关于编程、AI、读书和中俄生活的记录。',
+      empty: '还没有中文文章。',
+      allWritingShort: '全部文章',
+      backToWriting: '返回文章列表',
+    },
   },
-} satisfies Record<Locale, object>
+}
 
 export type Project = {
   slug: string
@@ -118,55 +127,3 @@ export const toolkit = [
   },
 ]
 
-export const posts: Post[] = [
-  {
-    slug: 'i-thought-i-was-outside-the-race',
-    title: {
-      en: 'I thought I was outside the race',
-      zh: '我以为内卷和我没关系',
-    },
-    date: {
-      en: 'September 5, 2026',
-      zh: '2026 年 9 月 5 日',
-    },
-    dateTime: '2026-09-05',
-    category: {
-      en: 'Thoughts',
-      zh: '想法',
-    },
-    readingTime: {
-      en: '3 min read',
-      zh: '阅读约 3 分钟',
-    },
-    locales: ['en', 'zh'],
-    excerpt: {
-      en: 'On San Francisco, Shenzhen, 卷, and realizing that you do not have to be inside a race for its pressure to follow you home.',
-      zh: '我以为自己不在旧金山的圈子里，内卷就和我没关系。去了一次深圳后，我发现好像不是这样。',
-    },
-  },
-  {
-    slug: 'ai-hype-my-thoughts',
-    title: {
-      en: 'AI Hype: My Thoughts',
-      zh: 'AI Hype: My Thoughts',
-    },
-    date: {
-      en: 'July 22, 2026',
-      zh: '2026 年 7 月 22 日',
-    },
-    dateTime: '2026-07-22',
-    category: {
-      en: 'Thoughts',
-      zh: '想法',
-    },
-    readingTime: {
-      en: '4 min read',
-      zh: '阅读约 4 分钟',
-    },
-    locales: ['en'],
-    excerpt: {
-      en: 'On AI pressure, the fear of falling behind, and choosing to learn and build at your own pace.',
-      zh: '写给被 AI 浪潮推着走的人：不用害怕落后，也不用按照别人的速度学习和生活。',
-    },
-  },
-]

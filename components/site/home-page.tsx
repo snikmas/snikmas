@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight, AtSign, BookOpen, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
-import { type Locale, owner, posts, type Project, siteCopy, toolkit } from './data'
+import { listPosts } from '@/lib/posts'
+import { localePrefix, siteUrl } from '@/lib/url'
+import { type Locale, owner, type Project, siteCopy, toolkit } from './data'
 import { SiteHeader } from './site-header'
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
 const socialLinks = [
   { label: 'GitHub', href: owner.github, icon: Code2 },
@@ -33,9 +33,7 @@ function Section({
       id={id}
       className="site-section scroll-mt-24 grid gap-6 border-t border-border py-12 md:grid-cols-[9rem_1fr] md:gap-12 md:py-16"
     >
-      <h2 className="section-label text-sm font-medium text-muted-foreground">
-        {label}
-      </h2>
+      <h2 className="section-label text-sm font-medium text-muted-foreground">{label}</h2>
       <div>{children}</div>
     </section>
   )
@@ -43,10 +41,9 @@ function Section({
 
 export function HomePage({ locale, projects }: { locale: Locale; projects: Project[] }) {
   const copy = siteCopy[locale]
-  const isChinese = locale === 'zh'
-  const writingHref = isChinese ? '/zh/writing' : '/writing'
-  const readMore = isChinese ? '阅读全文' : 'Read more'
-  const links = isChinese
+  const prefix = localePrefix(locale)
+  const writingPosts = listPosts(locale)
+  const links = locale === 'zh'
     ? [...socialLinks.slice(0, 3), rednoteLink, ...socialLinks.slice(3)]
     : socialLinks
 
@@ -83,8 +80,8 @@ export function HomePage({ locale, projects }: { locale: Locale; projects: Proje
 
             <div className="avatar-wrap -mt-6 h-56 w-40 justify-self-end sm:-mt-10 sm:h-64 sm:w-44 md:mt-0 md:h-72 md:w-52 lg:h-80 lg:w-60">
               <Image
-                src={`${basePath}/mary-avatar-pixel-v2.png`}
-                alt={isChinese ? 'Mary 的像素风头像' : 'Pixel-art avatar of Mary'}
+                src={siteUrl('/mary-avatar-pixel-v2.png')}
+                alt={locale === 'zh' ? 'Mary 的像素风头像' : 'Pixel-art avatar of Mary'}
                 width={1024}
                 height={1536}
                 priority
@@ -140,47 +137,42 @@ export function HomePage({ locale, projects }: { locale: Locale; projects: Proje
           </div>
         </Section>
 
-        <Section id="writing" label={copy.writingLabel}>
-          <div className="divide-y divide-border">
-            {posts.slice(0, 3).map((post) => {
-              const articleLocale = post.locales.includes(locale) ? locale : 'en'
-              const articleHref = articleLocale === 'zh'
-                ? `/zh/writing/${post.slug}`
-                : `/writing/${post.slug}`
-
-              return (
+        {writingPosts.length > 0 && (
+          <Section id="writing" label={copy.writingLabel}>
+            <div className="divide-y divide-border">
+              {writingPosts.slice(0, 3).map((post) => (
                 <article key={post.slug} className="group max-w-2xl py-8 first:pt-0 last:pb-0">
                   <p className="text-sm text-muted-foreground">
-                    <time dateTime={post.dateTime}>{post.date[locale]}</time>
+                    <time dateTime={post.dateTime}>{post.date}</time>
                     <span aria-hidden="true"> · </span>
-                    {post.locales.map((postLocale) => postLocale === 'en' ? 'EN' : '中文').join(' · ')}
+                    {post.languages.join(' · ')}
                   </p>
                   <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-                    <Link href={articleHref} className="title-link inline-flex min-h-11 items-center">
-                      {post.title[articleLocale]}
+                    <Link href={`${prefix}/writing/${post.slug}`} className="title-link inline-flex min-h-11 items-center">
+                      {post.title}
                     </Link>
                   </h3>
-                  <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt[locale]}</p>
+                  <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt}</p>
                   <Link
-                    href={articleHref}
+                    href={`${prefix}/writing/${post.slug}`}
                     className="title-link mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-medium"
-                    aria-label={`${readMore}: ${post.title[articleLocale]}`}
+                    aria-label={`${copy.readMore}: ${post.title}`}
                   >
-                    {readMore}
+                    {copy.readMore}
                     <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
                   </Link>
                 </article>
-              )
-            })}
-          </div>
-          <Link
-            href={writingHref}
-            className="title-link mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium"
-          >
-            {copy.allWriting}
-            <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
-          </Link>
-        </Section>
+              ))}
+            </div>
+            <Link
+              href={`${prefix}/writing`}
+              className="title-link mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium"
+            >
+              {copy.allWriting}
+              <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
+            </Link>
+          </Section>
+        )}
 
         <footer className="border-t border-border py-6 text-sm text-muted-foreground">
           <span>© 2026 {owner.name}</span>
