@@ -46,10 +46,11 @@ function renderLocale(locale: Locale): string {
 function summarize(entry: PostEntry, locale: Locale): PostSummary | null {
   const body = entry.bodies[locale]
   const excerpt = entry.meta.excerpt[locale]
-  if (!body || !excerpt) return null
+  const title = entry.meta.title[locale]
+  if (!body || !excerpt || !title) return null
   return {
     slug: entry.meta.slug,
-    title: entry.meta.title,
+    title,
     category: entry.meta.category,
     date: formatDate(entry.meta.date, locale),
     dateTime: entry.meta.date,

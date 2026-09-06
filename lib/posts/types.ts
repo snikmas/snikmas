@@ -6,8 +6,8 @@ export type PostMeta = {
   /** ISO date, e.g. '2026-07-22' */
   date: string
   category: string
-  /** In the language the post is written in */
-  title: string
+  /** One title per locale the post has a body in */
+  title: Partial<Record<Locale, string>>
   /** One excerpt per locale the post has a body in */
   excerpt: Partial<Record<Locale, string>>
 }

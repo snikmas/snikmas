@@ -11,7 +11,10 @@ function makeFixture(): PostEntry {
       slug: 'bilingual-fixture',
       date: '2026-08-15',
       category: 'Test',
-      title: 'Bilingual Fixture',
+      title: {
+        en: 'Bilingual Fixture',
+        zh: '双语示例',
+      },
       excerpt: {
         en: 'English excerpt.',
         zh: '中文摘要。',
@@ -57,7 +60,7 @@ describe('real registry', () => {
     const post = getPost('i-thought-i-was-outside-the-race', 'zh')
     expect(post).not.toBeNull()
     expect(post?.Component).toBeTypeOf('function')
-    expect(post?.title).toBe('I thought I was outside the race')
+    expect(post?.title).toBe('我以为自己在这场赛跑之外')
     expect(post?.dateTime).toBe('2026-09-05')
     expect(post?.category).toBe('Thoughts')
   })
