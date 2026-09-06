@@ -12,6 +12,7 @@ export function SiteHeader({
   const isChinese = locale === 'zh'
   const homeHref = isChinese ? '/zh' : '/'
   const writingHref = isChinese ? '/zh/writing' : '/writing'
+  const booksHref = isChinese ? '/zh/books' : '/books'
   const languageHref = alternateHref ?? (isChinese ? '/' : '/zh')
 
   return (
@@ -39,6 +40,9 @@ export function SiteHeader({
             </Link>
             <Link href={writingHref} className="nav-link">
               {copy.nav.writing}
+            </Link>
+            <Link href={booksHref} className="nav-link">
+              {copy.nav.books}
             </Link>
           </nav>
 
