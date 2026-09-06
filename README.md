@@ -10,10 +10,9 @@ I learn new things by playing with them for a few weeks until they feel natural.
 
 - **Backend:** Python, FastAPI, Pydantic, SQLAlchemy, Alembic
 - **Data & jobs:** PostgreSQL, SQLite, Redis, RQ, Pandas
-- **AI stuff:** model APIs (DeepSeek, Ckayde, OpenAi and others), agents, structured outputs, faster-whisper for local transcription
-- **A bit of ML:** scikit-learn, XGBoost
+- **AI stuff:** model APIs (DeepSeek, Claude, OpenAI and others), agents, structured outputs, faster-whisper for local transcription
 - **Frontend:** Next.js, React, TypeScript, Tailwind, Streamlit for quick dashboards
-- **Also:** pytest, Ruff, Git, Linux, Docker, and a couple of Telegram bots
+- **Also:** pytest, Git, Linux, Docker, and a couple of Telegram bots
 
 ## Learning
 
