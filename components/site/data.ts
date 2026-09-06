@@ -109,21 +109,29 @@ export const fallbackProjects: Project[] = [
 
 export const toolkit = [
   {
-    label: { en: 'Main stack', zh: '主力技术栈' },
-    items: ['Python', 'TypeScript', 'SQL', 'FastAPI', 'PostgreSQL', 'Redis', 'Docker'],
+    label: { en: 'Backend', zh: '后端' },
+    items: ['Python', 'FastAPI', 'Pydantic', 'SQLAlchemy', 'Alembic'],
   },
   {
-    label: { en: 'Also worked with', zh: '也用这些做过项目' },
+    label: { en: 'Data & jobs', zh: '数据与任务' },
+    items: ['PostgreSQL', 'SQLite', 'Redis', 'RQ', 'Pandas'],
+  },
+  {
+    label: { en: 'AI', zh: 'AI' },
     items: [
-      'Pydantic',
-      'SQLAlchemy',
-      'pytest',
-      'GitHub Actions',
-      'React',
-      'Telegram Bot API',
+      'model APIs (DeepSeek, Claude, OpenAI)',
+      'agents',
+      'structured outputs',
       'faster-whisper',
-      'Linux',
     ],
+  },
+  {
+    label: { en: 'Frontend', zh: '前端' },
+    items: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'Streamlit'],
+  },
+  {
+    label: { en: 'Also', zh: '其他' },
+    items: ['pytest', 'Git', 'Linux', 'Docker', 'Telegram bots'],
   },
 ]
 
