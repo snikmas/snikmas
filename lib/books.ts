@@ -98,7 +98,7 @@ export const books: Book[] = [
     slug: 'games-people-play',
     title: 'Games People Play',
     author: 'Eric Berne',
-    status: 'planned',
+    status: 'reading',
     category: 'people',
     note: {
       en: 'Transactional analysis and the recurring interpersonal "games" people unconsciously enact.',
@@ -262,7 +262,7 @@ export const books: Book[] = [
     slug: 'on-writing-well',
     title: 'On Writing Well',
     author: 'William Zinsser',
-    status: 'planned',
+    status: 'reading',
     category: 'writing',
     note: {
       en: 'Clear nonfiction: simplicity, clutter, voice, structure and revision. The best starting point for this site.',
@@ -334,7 +334,7 @@ export const books: Book[] = [
     slug: 'a-philosophy-of-software-design',
     title: 'A Philosophy of Software Design',
     author: 'John Ousterhout',
-    status: 'planned',
+    status: 'reading',
     category: 'programming',
     note: {
       en: 'Complexity, deep modules, design judgment — agents write lines fast; you still judge whether they created complexity.',
