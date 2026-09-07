@@ -145,16 +145,6 @@ export const books: Book[] = [
     },
   },
   {
-    slug: 'hold-me-tight',
-    title: 'Hold Me Tight',
-    author: 'Sue Johnson',
-    status: 'planned',
-    category: 'people',
-    note: {
-      en: 'Repeating emotional cycles in close relationships — the interaction loop between two people, not attachment-style labels.',
-    },
-  },
-  {
     slug: 'barking-up-the-wrong-tree',
     title: 'Barking Up the Wrong Tree',
     author: 'Eric Barker',
@@ -190,7 +180,7 @@ export const books: Book[] = [
     slug: 'mans-search-for-meaning',
     title: "Man's Search for Meaning",
     author: 'Viktor Frankl',
-    status: 'planned',
+    status: 'reading',
     category: 'life',
     note: {
       en: 'Meaning, suffering and responsibility — a serious counterweight to modern self-help.',
@@ -250,7 +240,7 @@ export const books: Book[] = [
     slug: 'stolen-focus',
     title: 'Stolen Focus',
     author: 'Johann Hari',
-    status: 'planned',
+    status: 'read',
     category: 'life',
     note: {
       en: 'Why sustained attention is getting harder — technology, sleep, stress and incentives.',
