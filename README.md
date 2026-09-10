@@ -1,25 +1,15 @@
 # Hi, I'm Mary
 
-A computer science student at Zhengzhou University in China.
+I'm a CS student at Zhengzhou University in China and a mostly self-taught programmer. I started with frontend, but eventually realized I enjoy backend much more — especially the parts where APIs, databases, workers, and external systems have to work together.
 
-I enjoy building backends and small tools that look interesting. I usually work with backend stuff: Python, FastAPI, PostgreSQL, Redis. Lately I've been making AI applications too (it's pretty fun): agents, or backends that call model APIs.
+These days I'm mostly building Python backends and LLM/Agent applications. Right now I'm exploring RAG, LangChain, LangGraph, MCP, agent memory, tool use, and evaluation.
 
-I learn new things by playing with them for a few weeks until they feel natural.
+I like understanding how systems work end to end. Outside of coding, I also like writing about things I learn and find interesting on [my website](https://snikmas.github.io/snikmas/).
 
-## Tools I use
+## Stack
 
-- **Backend:** Python, FastAPI, Pydantic, SQLAlchemy, Alembic
-- **Data & jobs:** PostgreSQL, SQLite, Redis, RQ, Pandas
-- **AI stuff:** model APIs (DeepSeek, Claude, OpenAI and others), agents, structured outputs, faster-whisper for local transcription
-- **Frontend:** Next.js, React, TypeScript, Tailwind, Streamlit for quick dashboards
-- **Also:** pytest, Git, Linux, Docker, and a couple of Telegram bots
+**Backend:** Python · FastAPI · PostgreSQL · Redis · SQLAlchemy · Pydantic  
+**AI / Agents:** LLM APIs · RAG · LangChain · LangGraph · MCP · tool calling · structured outputs  
+**Engineering:** pytest · Git · Linux · Docker · GitHub Actions
 
-## Learning
-
-Currently I'm interested in backend and agentic stuff. I'm learning LangSmith, LangChain, and LangGraph, trying to use them together.
-
-## Sometimes I write
-
-I like sharing my thoughts and observations about IT, China, and personal things,
-so I made a small site for them — https://snikmas.github.io/snikmas/. Feel free to
-check it out if you're interested. I'm also trying to write in Chinese to improve it.
+I'm open to internships and new connections. Feel free to reach out
