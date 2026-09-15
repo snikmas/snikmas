@@ -38,6 +38,7 @@ const books = [
   ['show-your-work', 'Show Your Work!', 'Austin Kleon'],
   ['bird-by-bird', 'Bird by Bird', 'Anne Lamott'],
   ['a-philosophy-of-software-design', 'A Philosophy of Software Design', 'John Ousterhout'],
+  ['computer-networks-a-systems-approach', 'Computer Networks: A Systems Approach', 'Larry Peterson'],
   ['the-pragmatic-programmer', 'The Pragmatic Programmer', 'David Thomas'],
   ['refactoring', 'Refactoring', 'Martin Fowler'],
   ['designing-data-intensive-applications', 'Designing Data-Intensive Applications', 'Martin Kleppmann'],

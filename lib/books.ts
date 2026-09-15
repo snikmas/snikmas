@@ -331,6 +331,16 @@ export const books: Book[] = [
     },
   },
   {
+    slug: 'computer-networks-a-systems-approach',
+    title: 'Computer Networks: A Systems Approach',
+    author: 'Larry Peterson, Bruce Davie',
+    status: 'reading',
+    category: 'programming',
+    note: {
+      en: 'Networking from first principles — how the internet actually works, end to end. Free to read online.',
+    },
+  },
+  {
     slug: 'the-pragmatic-programmer',
     title: 'The Pragmatic Programmer',
     author: 'Andrew Hunt, David Thomas',
