@@ -186,6 +186,10 @@
     @apply border-l-2 border-accent py-1 pl-6 text-xl leading-9 text-muted-foreground;
   }
 
+  .article-copy .article-note {
+    @apply mx-auto mt-7 max-w-2xl border-l-2 border-accent py-1 pl-6 text-muted-foreground;
+  }
+
   .article-copy .article-ending {
     @apply border-y border-border py-6 text-base leading-8;
   }
@@ -200,6 +204,85 @@
 
   .article-copy a {
     @apply text-accent underline decoration-1 underline-offset-4;
+  }
+
+  .article-copy h2 {
+    @apply mx-auto mt-16 max-w-2xl text-2xl font-semibold tracking-tight text-foreground;
+  }
+
+  .article-copy h3 {
+    @apply mx-auto mt-12 max-w-2xl text-lg font-semibold tracking-tight text-foreground;
+  }
+
+  .article-copy ul,
+  .article-copy ol {
+    @apply mx-auto mt-7 max-w-2xl space-y-2 pl-6;
+  }
+
+  .article-copy ul {
+    @apply list-disc;
+  }
+
+  .article-copy ol {
+    @apply list-decimal;
+  }
+
+  .article-copy li::marker {
+    @apply text-muted-foreground;
+  }
+
+  .article-copy li > p {
+    @apply mt-2;
+  }
+
+  .article-copy li > p:first-child {
+    @apply mt-0;
+  }
+
+  .article-copy li > ul,
+  .article-copy li > ol,
+  .article-copy li > pre {
+    @apply mt-3;
+  }
+
+  .article-copy pre {
+    @apply mx-auto mt-7 max-w-2xl overflow-x-auto rounded-md border border-border bg-card p-4 text-sm leading-7;
+  }
+
+  .article-copy pre.diagram {
+    @apply text-center;
+  }
+
+  .article-copy code {
+    @apply font-mono text-[0.9em];
+  }
+
+  .article-copy :not(pre) > code {
+    @apply rounded-sm bg-muted px-1.5 py-0.5;
+  }
+
+  .article-copy p img {
+    @apply mx-auto block rounded-md border border-border;
+  }
+
+  .article-copy hr {
+    @apply mx-auto mt-10 max-w-2xl border-border;
+  }
+
+  .article-copy .article-toc {
+    @apply mx-auto max-w-2xl rounded-md border border-border bg-card p-6 text-sm leading-7;
+  }
+
+  .article-copy .article-toc p {
+    @apply text-xs font-medium uppercase tracking-wider text-muted-foreground;
+  }
+
+  .article-copy .article-toc ol {
+    @apply mt-3 list-none space-y-1.5 pl-0;
+  }
+
+  .article-copy .article-toc a {
+    @apply text-foreground no-underline transition-colors hover:text-accent;
   }
 }
 

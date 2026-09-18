@@ -37,6 +37,7 @@ describe('real registry', () => {
   it('lists English posts newest first', () => {
     const posts = listPosts('en')
     expect(posts.map((p) => p.slug)).toEqual([
+      'setup-your-own-vpn',
       'i-thought-i-was-outside-the-race',
       'ai-hype-my-thoughts',
     ])
