@@ -1,5 +1,5 @@
 import { createPostApi } from './core'
-import { registry } from './registry'
+import { registry } from './registry.generated'
 
 const { listPosts, getPost } = createPostApi(registry)
 
