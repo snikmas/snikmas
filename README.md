@@ -1,15 +1,23 @@
 # Hi, I'm Mary
 
-I'm a CS student at Zhengzhou University in China and a mostly self-taught programmer. I started with frontend, but eventually realized I enjoy backend much more — especially the parts where APIs, databases, workers, and external systems have to work together.
+a student at a chinese university studying Computer Science. I like exploring how things work. 
 
-These days I'm mostly building Python backends and LLM/Agent applications. Right now I'm exploring RAG, LangChain, LangGraph, MCP, agent memory, tool use, and evaluation.
+Right now, my main focus is **AI agents, LLM-related stuff, and networking**. Plus a little bit of machine learning too (thanks to my friend. Before that, I thought ML was way too hard and there was no way I was going to learn it).
 
-I like understanding how systems work end to end. Outside of coding, I also like writing about things I learn and find interesting on [my website](https://snikmas.github.io/snikmas/).
+These days, I build things and hope they can become useful at some point:
+
+* **[Reckoning](RECKONING_LINK)** — an agent that follows your goals (in progress)
+* **[project-navigator](PROJECT_NAVIGATOR_LINK)** — an experiment with agent skills and workflows. It puts the whole project-building process into stages: planning, breaking work into tickets, implementation, review, and iteration.
+* **[AI customer support system](AI_SUPPORT_LINK)** — a more complete backend project for handling users, tickets, AI processing, and background jobs
+
+I also like writing about things on [my website](https://snikmas.github.io/snikmas/).
 
 ## Stack
 
-**Backend:** Python · FastAPI · PostgreSQL · Redis · SQLAlchemy · Pydantic  
-**AI / Agents:** LLM APIs · RAG · LangChain · LangGraph · MCP · tool calling · structured outputs  
+**Backend:** Python · FastAPI · PostgreSQL · Redis · SQLAlchemy · Pydantic
+
+**AI / Agents:** LLM APIs · RAG · LangChain · LangGraph · MCP · Tool Calling
+
 **Engineering:** pytest · Git · Linux · Docker · GitHub Actions
 
-I'm open to internships and new connections. Feel free to reach out
+I'm open to internships, interesting projects, and new connections. Feel free to reach out
