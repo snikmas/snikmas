@@ -492,4 +492,14 @@ export const books: Book[] = [
       en: 'Why your twenties matter — decisions about work, love and identity compound early.',
     },
   },
+  {
+    slug: 'uncle-petros-and-goldbachs-conjecture',
+    title: "Uncle Petros and Goldbach's Conjecture",
+    author: 'Apostolos Doxiadis',
+    status: 'planned',
+    category: 'fiction',
+    note: {
+      en: "A novel about a mathematician who sacrifices his life to proving Goldbach's Conjecture — genius, obsession and the cost of chasing an unsolvable problem.",
+    },
+  },
 ]

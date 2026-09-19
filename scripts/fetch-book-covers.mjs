@@ -54,6 +54,7 @@ const books = [
   ['atomic-habits', 'Atomic Habits', 'James Clear'],
   ['dont-believe-everything-you-feel', "Don't Believe Everything You Feel", 'Robert L. Leahy'],
   ['the-defining-decade', 'The Defining Decade', 'Meg Jay'],
+  ['uncle-petros-and-goldbachs-conjecture', "Uncle Petros and Goldbach's Conjecture", 'Apostolos Doxiadis'],
 ]
 
 const outDir = path.join(process.cwd(), 'public', 'books')
