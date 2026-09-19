@@ -1,10 +1,10 @@
 # Hi, I'm Mary
 
-a student at a chinese university studying Computer Science. I like exploring how things work. 
+I'm someone who likes building and exploring software engineering things, hoping they might be useful someday.
 
 Right now, my main focus is **AI agents, LLM-related stuff, and networking**. Plus a little bit of machine learning too (thanks to my friend. Before that, I thought ML was way too hard and there was no way I was going to learn it).
 
-These days, I build things and hope they can become useful at some point:
+Some of my projects:
 
 * **[Reckoning](RECKONING_LINK)** — an agent that follows your goals (in progress)
 * **[project-navigator](PROJECT_NAVIGATOR_LINK)** — an experiment with agent skills and workflows. It puts the whole project-building process into stages: planning, breaking work into tickets, implementation, review, and iteration.
