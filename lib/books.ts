@@ -98,7 +98,7 @@ export const books: Book[] = [
     slug: 'games-people-play',
     title: 'Games People Play',
     author: 'Eric Berne',
-    status: 'reading',
+    status: 'read',
     category: 'people',
     note: {
       en: 'Transactional analysis and the recurring interpersonal "games" people unconsciously enact.',
