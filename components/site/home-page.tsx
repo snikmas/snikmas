@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, AtSign, BookOpen, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
+import { ArrowUpRight, BookOpen, BriefcaseBusiness, Code2, FileText, Mail } from 'lucide-react'
 import { listPosts } from '@/lib/posts'
 import { localePrefix, siteUrl } from '@/lib/url'
 import { type Locale, owner, type Project, siteCopy, toolkit } from './data'
@@ -9,7 +9,6 @@ import { SiteHeader } from './site-header'
 const socialLinks = [
   { label: 'GitHub', href: owner.github, icon: Code2 },
   { label: 'LinkedIn', href: owner.linkedin, icon: BriefcaseBusiness },
-  { label: 'X', href: owner.x, icon: AtSign },
   { label: 'Email', href: `mailto:${owner.email}`, icon: Mail },
 ]
 
@@ -44,8 +43,12 @@ export function HomePage({ locale, projects }: { locale: Locale; projects: Proje
   const prefix = localePrefix(locale)
   const writingPosts = listPosts(locale)
   const links = locale === 'zh'
-    ? [...socialLinks.slice(0, 3), rednoteLink, ...socialLinks.slice(3)]
+    ? [...socialLinks.slice(0, 2), rednoteLink, ...socialLinks.slice(2)]
     : socialLinks
+  const linksWithCv = [
+    ...links,
+    { label: copy.nav.cv, href: siteUrl(locale === 'zh' ? '/cv-zh.pdf' : '/cv.pdf'), icon: FileText, blank: true },
+  ]
 
   return (
     <div className="dir-journal min-h-svh bg-background text-foreground" lang={copy.htmlLang}>
@@ -63,12 +66,12 @@ export function HomePage({ locale, projects }: { locale: Locale; projects: Proje
               <p className="mt-3 max-w-xl leading-7 text-muted-foreground">{copy.note}</p>
 
               <div className="mt-7 flex flex-wrap items-center gap-2" aria-label={copy.socialLabel}>
-                {links.map(({ label, href, icon: Icon }) => (
+                {linksWithCv.map(({ label, href, icon: Icon, ...rest }) => (
                   <a
                     key={label}
                     href={href}
-                    target={href.startsWith('http') ? '_blank' : undefined}
-                    rel={href.startsWith('http') ? 'noreferrer' : undefined}
+                    target={href.startsWith('http') || 'blank' in rest ? '_blank' : undefined}
+                    rel={href.startsWith('http') || 'blank' in rest ? 'noreferrer' : undefined}
                     className="social-link inline-flex min-h-11 items-center gap-2 text-sm"
                   >
                     <Icon size={16} strokeWidth={1.8} aria-hidden="true" />

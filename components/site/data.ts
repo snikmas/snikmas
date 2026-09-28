@@ -6,7 +6,6 @@ export const owner = {
   email: 'mary.snikk@gmail.com',
   github: 'https://github.com/snikmas',
   linkedin: 'https://www.linkedin.com/in/snikmas/',
-  x: 'https://x.com/snikmas',
   rednote: '1282530219',
 }
 
@@ -19,6 +18,7 @@ export const siteCopy = {
       projects: 'Projects',
       toolkit: 'Toolkit',
       books: 'Books',
+      cv: 'CV',
     },
     aboutLabel: 'About me',
     greeting: "Hi, I'm Mary",
@@ -73,6 +73,7 @@ export const siteCopy = {
       projects: '项目',
       toolkit: '技术栈',
       books: '读书',
+      cv: '简历',
     },
     aboutLabel: '关于我',
     greeting: '嗨，我是 Mary',

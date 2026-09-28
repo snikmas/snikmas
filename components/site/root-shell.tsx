@@ -1,9 +1,15 @@
-import { Geist, Geist_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
 import Script from 'next/script'
 import type { ReactNode } from 'react'
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
-const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
+const geist = localFont({
+  src: '../../app/fonts/Geist-Variable.woff2',
+  variable: '--font-geist',
+})
+const geistMono = localFont({
+  src: '../../app/fonts/GeistMono-Variable.woff2',
+  variable: '--font-geist-mono',
+})
 
 export function RootShell({
   lang,

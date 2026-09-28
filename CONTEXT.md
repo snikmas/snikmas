@@ -43,3 +43,17 @@ into `public/books/` by `scripts/fetch-book-covers.mjs` (Open Library) so the
 static export never depends on an external image host. There is one index
 page per locale and no per-book pages; long-form thoughts about a book belong
 in `/writing`.
+
+## CV
+
+The CV is a PDF file, not a page: `public/cv.pdf` (English) and
+`public/cv-zh.pdf` (中文), exported from the source Google Docs. Nav and
+homepage hero links open the PDF in a new tab. To update it, re-export the
+Google Doc and replace the file.
+
+## Fonts
+
+Geist and Geist Mono are vendored as variable woff2 files in `app/fonts/`
+and loaded with `next/font/local` (`components/site/root-shell.tsx`). The
+build never fetches Google Fonts, so it works offline and on networks where
+Google is unreachable.
