@@ -1,0 +1,262 @@
+These days, I'm building Interview Agent to help people prepare for interviews at Chinese tech companies. The idea is that you choose a target company and role, and the agent interviews you using relevant questions retrieved from its knowledge base.
+
+One of the important parts of this project is preparing that knowledge base for RAG. RAG lets an application retrieve relevant information and provide it to a model when generating a response. Wanna give the agent useful questions? First, I need to make sure those questions still make sense outside the reports they came from.
+
+Preparing data is a whole topic worth talking about: data pipeline design. Here, I'll go through its main responsibilities and use my project as an example. The data preparation is implemented; indexing and the interview-practice flow are still unfinished.
+
+This is what my pipeline looks like now:
+
+```text
+Interview reports
+  → Collect and clean report text
+  → Remove repeated report URLs
+  → Extract interviews, questions, and metadata
+  → Save interviews with source evidence
+  → Turn question lists into individual records
+  → Add labels and related context
+  → Check and save the question bank
+```
+
+## What is data pipeline design?
+
+Data pipeline design is about deciding how data moves from its source into a form your application can use. That includes collecting, processing, and storing it, but also deciding what to preserve, what to check, and what happens when something goes wrong.
+
+You might already be doing parts of this: getting data from an API, checking fields, changing the structure, and saving the result. Taken together, those operations form a data pipeline, even if you haven't thought about them from this perspective before. Looking at the whole flow helps you notice what one operation needs from another.
+
+A broader map of the responsibilities looks like this:
+
+```text
+Collect
+  Source, collection, ingestion, raw data
+  ↓
+Prepare
+  Validation, cleaning, normalization, transformation,
+  enrichment, deduplication, data-quality checks
+  ↓
+Store
+  Processed data and intermediate results
+  ↓
+Make available
+  Indexing and serving
+  ↓
+Use
+  An application consumes the result
+```
+
+Quite a lot, right? But these are responsibilities, and they don't always need separate components. Cleaning can happen during collection. Validation can happen at several points. The source is where the flow begins, and consumption is what the flow is for.
+
+Okay, this turned into a long read. There are quite a few things hiding inside "prepare the data." Feel free to jump to the part you need.
+
+<nav className="article-toc mt-7" aria-label="Table of contents">
+
+- [Get data into your system](#get-data-into-your-system):
+    - [source](#source-where-does-the-data-exist)
+    - [collection and extraction](#collection-and-extraction-how-do-i-get-the-data)
+    - [ingestion](#ingestion-how-does-the-data-enter-my-system)
+    - [raw data](#raw-data-what-should-i-preserve-before-processing-further)
+- [Processing your data](#processing-your-data):
+    - [validation](#validation-does-the-data-follow-the-rules-i-expect)
+    - [cleaning](#cleaning-what-needs-to-be-removed)
+    - [normalization](#normalization-what-is-the-standard-representation-for-the-data)
+    - [transformation](#transformation-what-structure-does-my-application-need)
+- [Adding information and checking the result](#adding-information-and-checking-the-result):
+    - [enrichment](#enrichment-what-additional-information-would-make-the-data-useful)
+    - [deduplication](#deduplication-what-counts-as-the-same-thing)
+    - [data-quality checks](#data-quality-checks-is-the-resulting-dataset-useful-for-its-purpose)
+- [Making the data available](#making-the-data-available):
+    - [storage](#storage-where-does-the-processed-data-live)
+    - [indexing](#indexing-how-will-i-find-relevant-data-efficiently)
+    - [serving](#serving-how-can-the-application-access-the-data)
+    - [consumption](#consumption-who-uses-the-result-and-for-what)
+- [What this means for my project: the decisions behind the stages.](#what-this-means-for-my-project)
+
+</nav>
+
+## Get data into your system
+
+### Source. Where does the data exist?
+
+First, define what information your project needs and where you can find it. Possible sources include APIs, databases, files, websites, and event streams.
+
+When you're starting an MVP, one or two important sources can be enough. Try building the whole pipeline for one source, solve the problems you encounter, and then add more. Otherwise, you can spend quite a lot of time collecting things before you know whether the result is useful.
+
+In my case, I'm using one source for the prototype: 牛客, or Nowcoder. Candidates share interview reports there, and those reports can contain questions, company names, roles, and other details. They are people's accounts of their interviews, so some information can be missing or incorrect.
+
+### Collection and extraction. How do I get the data?
+
+Collection gets content from the source. You might make an HTTP request, query a database, read a file, or scrape a page. Then you need to decide whether that content already has the structure your application needs.
+
+A database query might return exactly the fields you want. A written report probably won't. One post can describe several interviews, with different companies or rounds, so fetching one post doesn't necessarily give me one interview record.
+
+In my project, ordinary Python code collects the reports. Then an LLM identifies the interviews inside each report and extracts questions and metadata. Interpreting those differently written reports is where I use the model. Fetching pages, copying source URLs, and saving files don't need an LLM.
+
+The extraction prompt asks for the original question wording, including coding tasks and their stated constraints. "Implement an LRU cache" is an interview question too, even without a question mark. Python then checks the result before it can be saved.
+
+### Ingestion. How does the data enter my system?
+
+Ingestion brings external data into your processing system. Here, you decide how incoming data reaches the next operation and when that happens.
+
+Two common approaches are:
+
+- Batch ingestion, which loads a bounded set of records for a run.
+- Streaming ingestion, which handles an ongoing flow of incoming records.
+
+A scheduled job can fetch a batch, and so can a user-triggered command. The trigger and the way you process the data are related decisions, but they aren't the same thing.
+
+My current pipeline runs as scripts: collect a limited set of reports, remove repeated URLs, and pass the report text to extraction. Collection and ingestion overlap here, so I don't need a separate ingestion component.
+
+You might also encounter chunking, especially in RAG. Chunking splits content into smaller units for processing or retrieval. That's a separate decision from batch versus streaming. In this project, I want individual questions to become retrieval units, while keeping the context they need.
+
+### Raw data. What should I preserve before processing further?
+
+Saving source data lets you compare a processed result with its input. If you change your extraction logic, you can also process that input again without fetching it from the website.
+
+For each saved interview, I keep the full collected report text, the text of its interview section, and the source URL. This is text after collection and cleaning, rather than the original HTML response. Keeping both the report and the section helps me inspect where an extracted question came from.
+
+There is a limitation here: I don't yet archive every fetched report before extraction. Failed inputs and posts that produce no interview records aren't saved by the current driver. So the saved interviews are useful evidence, but they aren't a complete archive of everything the collector saw.
+
+## Processing your data
+
+### Validation. Does the data follow the rules I expect?
+
+Validation checks required fields, types, allowed values, and relationships between fields. For example, a company name might need to be non-empty, a date must be parseable, or a topic must belong to an allowed list.
+
+It helps to separate an invalid value from a valid value written differently. 京东, JD, and Jingdong can all refer to the same company. A system might accept all three, then normalize them into one representation.
+
+In my project, I use good old Pydantic to check the structure of interviews and question records. I also check that each extracted question appears in its saved interview section, and that the section appears in the collected report text. If those checks fail, extraction raises an error instead of saving that output.
+
+That confirms that the text exists in the evidence. It doesn't prove that the LLM found every question or assigned it to the right interview. A valid record and a complete extraction are different things.
+
+### Cleaning. What needs to be removed?
+
+Cleaning removes irrelevant content or handles unusable values. Depending on the problem, you might remove an entire record, drop an empty list item, or clean one field.
+
+You could ask: we've already extracted the information we need, so why do we still need cleaning? Well, extraction might copy unnecessary whitespace or return empty entries. Cleaning can also happen earlier, while collecting content.
+
+In my project, cleaning includes removing HTML markup, scripts, and styles, dropping empty question strings, and trimming surrounding whitespace. I keep the question wording. Removing formatting shouldn't quietly turn into rewriting what the interviewer asked.
+
+### Normalization. What is the standard representation for the data?
+
+Normalization gives data a consistent representation. It's useful when sources use different date formats, company names, or units. Consistent values make filtering, comparison, and grouping more predictable.
+
+In my question bank, I normalize letter case and extra spaces for matching. For example:
+
+```text
+实现LRU Cache → 实现lru cache
+```
+
+This means "Implement an LRU cache." The normalized version lets me compare wording without treating letter case as a difference. The original wording stays in the saved question.
+
+The company-name example above shows another possible use of normalization. It isn't something my current pipeline automatically handles. Each normalization rule still needs to match what your application actually considers equivalent.
+
+### Transformation. What structure does my application need?
+
+Transformation changes data into the structure the application works with. You might split one record into several, combine inputs, or reorganize nested data.
+
+But cleaning and normalization also change data, right? Yes. Here, I'm using transformation to mean reorganizing the records.
+
+In my project, extraction turns a written report into one or more structured interviews. Then Python turns each interview's question list into individual question records, keeping the interview identity, question order, and source information.
+
+```text
+Report
+  → Interview A
+      → Question 1 + source information
+      → Question 2 + source information
+      → Question 3 + source information
+  → Interview B
+      → Question 1 + source information
+      → ...
+```
+
+Why keep the interview as an intermediate record? Because questions from the same interview belong together. If I split everything into isolated strings immediately, later steps have less information for understanding follow-ups. Individual records make questions easier to retrieve; retaining their relationship to the interview makes their context recoverable.
+
+## Adding information and checking the result
+
+### Enrichment. What additional information would make the data useful?
+
+Enrichment adds information such as classifications, keywords, or related context. In my question bank, another LLM operation adds topics and question types, and selects earlier questions needed to understand a follow-up.
+
+Here is a follow-up question from a saved Xiaohongshu interview report, translated into English:
+
+```text
+Earlier question:
+Suppose you're working on an e-commerce event with
+50 million products. How would you design the cache?
+
+Follow-up:
+How long would you set the expiration time?
+```
+
+The question bank keeps the follow-up's original Chinese wording, `过期时间会设置多久？`, and attaches the earlier question as context. The topic alone wouldn't tell the agent which scenario the follow-up belongs to.
+
+One detail I like here: the labeling model returns question numbers, labels, and context references. Its output schema has no field for replacement question text. Python attaches the labels to the existing questions and copies the selected context from the same interview. The model can still choose the wrong label or context, but this operation can't rewrite the stored question.
+
+If the required context is missing, the record can be marked for review. I don't want the model to invent a missing SQL query or coding-task description just to make the result look complete.
+
+### Deduplication. What counts as the same thing?
+
+Deduplication can be part of cleaning, but here's one more detail: what counts as a duplicate, and should we remove it? Accidentally processing the same report twice is different from seeing the same question in several reports.
+
+I remove repeated report URLs before extraction. In the question bank, I keep each question occurrence with its source information. Matching normalized wording and context receive a shared grouping ID, called `canonical_id`, while the occurrence records remain separate.
+
+Context matters here too. Two questions that both say "How would you optimize it?" can refer to entirely different problems. Grouping by those words alone would lose that distinction.
+
+But what if the same question is written differently? Recognizing that similarity and merging source statistics still need more work. The current grouping doesn't solve semantic deduplication.
+
+### Data-quality checks. Is the resulting dataset useful for its purpose?
+
+Okay, we have structured records, labels, and source links. Can the agent actually use them to ask understandable questions?
+
+My code checks that enrichment preserves the question text and that context references point to earlier questions in the same interview. It also checks for duplicate occurrence IDs before saving. These are concrete properties that ordinary code can verify.
+
+When a labeling batch fails, the pipeline tries its questions individually. A question that still can't be labeled is kept as an unenriched record and marked `needs_review`. Incomplete questions and questions with unresolved context are also marked for review. Those records don't receive `embedding_text`, the text prepared for a future embedding step.
+
+That gives me a way to retain a problematic record without preparing it for indexing. It doesn't make the other records automatically correct. I still need to compare them with the source and check whether questions were missed, labels make sense, and the attached context is enough. Passing a schema check can't answer all of that.
+
+## Making the data available
+
+### Storage. Where does the processed data live?
+
+For storage, you can use a database, an object store, or files. For now, I use JSON files. `interviews.json` stores extracted interviews and their evidence, while `questions.json` stores the processed question bank. This makes the intermediate results straightforward to inspect, and I can rebuild the bank without repeating collection and extraction.
+
+Another important decision is how updates work. Does a run replace the dataset, append new records, or update existing ones?
+
+My current scripts replace the whole output dataset. They write a temporary file first, then replace the previous file. There are checks to preserve existing output when a run produces no records, and the bank builder also stops if enrichment fails for every question. But a successful smaller run can still replace a larger dataset. This is a rebuild workflow; collecting another source won't automatically merge it with everything saved before.
+
+### Indexing. How will I find relevant data efficiently?
+
+For a small dataset, reading and filtering records directly might be enough. An index can make searches more efficient. Depending on the task, you might search by exact fields, words in the content, similarities in meaning, or a combination.
+
+In my project, `embedding_text` combines the question with its selected context. For the expiration-time example, it contains both the cache scenario and the follow-up. That gives a future embedding step more information than the short question alone.
+
+For a first retrieval version, one approach would be to filter questions by company or role, then search within those results by meaning. I'd want to check whether search returns a relevant question together with enough information to answer it.
+
+I haven't generated the vectors or built the index yet. Preparing text for embeddings is one step toward retrieval; I still need to implement and test the search itself.
+
+### Serving. How can the application access the data?
+
+Here, you define how a consumer requests information and what it receives. This could happen through an API, an agent tool, or a function inside the application.
+
+For my agent, the intended search function would accept filters such as company and topic, then return relevant questions with their context and source information. It would also need to respect the review flags. That part is still unfinished, so I don't have many implementation details yet :)
+
+### Consumption. Who uses the result, and for what?
+
+Consumption is the endpoint of this data flow: someone or something uses the prepared data for an actual task. That might be a dashboard, a model-training job, or an agent using retrieved information.
+
+The intended consumer in my project is Interview Agent. It would retrieve a relevant question, present it, evaluate the answer, and help the user continue practising. Preparing the question bank supports that flow; evaluating answers will need its own design and checks.
+
+The consumer's needs should influence the earlier stages. For interview practice, a question needs to be relevant to the target role and complete enough for someone to answer. That's why preserving context matters all the way back in extraction and transformation.
+
+## What this means for my project
+
+So, okay, you don't need fifteen separate components before your application can do anything useful. But it helps to ask what each responsibility means for your data. What can you safely remove? Which values need a consistent representation? What information must stay attached? Can you inspect the source if something goes wrong?
+
+For my project, the useful decisions are quite specific: keep the source wording, keep questions connected to their interviews, let the model add labels without replacing the questions, and flag records that still need attention. Some of that uses an LLM. A lot of it is ordinary Python.
+
+The main flow is still familiar:
+
+```text
+Collect → prepare → store
+```
+
+But now "prepare" has a more concrete meaning. Before my agent can ask someone how long they'd set the expiration time, it needs to know what is expiring. And I need to be able to trace that question back to the report it came from. That's the part of data pipeline design I'm working on here.
