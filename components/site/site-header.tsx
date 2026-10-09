@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { siteUrl } from '@/lib/url'
 import { type Locale, owner, siteCopy } from './data'
 
 export function SiteHeader({
@@ -14,7 +13,6 @@ export function SiteHeader({
   const homeHref = isChinese ? '/zh' : '/'
   const writingHref = isChinese ? '/zh/writing' : '/writing'
   const booksHref = isChinese ? '/zh/books' : '/books'
-  const cvHref = siteUrl(isChinese ? '/cv-zh.pdf' : '/cv.pdf')
   const languageHref = alternateHref ?? (isChinese ? '/' : '/zh')
 
   return (
@@ -46,9 +44,6 @@ export function SiteHeader({
             <Link href={booksHref} className="nav-link">
               {copy.nav.books}
             </Link>
-            <a href={cvHref} target="_blank" rel="noreferrer" className="nav-link">
-              {copy.nav.cv}
-            </a>
           </nav>
 
           <Link

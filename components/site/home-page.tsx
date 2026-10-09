@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, BookOpen, BriefcaseBusiness, Code2, FileText, Mail } from 'lucide-react'
+import { ArrowUpRight, BookOpen, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
 import { listPosts } from '@/lib/posts'
 import { localePrefix, siteUrl } from '@/lib/url'
 import { type Locale, owner, type Project, siteCopy, toolkit } from './data'
@@ -45,10 +45,6 @@ export function HomePage({ locale, projects }: { locale: Locale; projects: Proje
   const links = locale === 'zh'
     ? [...socialLinks.slice(0, 2), rednoteLink, ...socialLinks.slice(2)]
     : socialLinks
-  const linksWithCv = [
-    ...links,
-    { label: copy.nav.cv, href: siteUrl(locale === 'zh' ? '/cv-zh.pdf' : '/cv.pdf'), icon: FileText, blank: true },
-  ]
 
   return (
     <div className="dir-journal min-h-svh bg-background text-foreground" lang={copy.htmlLang}>
@@ -66,7 +62,7 @@ export function HomePage({ locale, projects }: { locale: Locale; projects: Proje
               <p className="mt-3 max-w-xl leading-7 text-muted-foreground">{copy.note}</p>
 
               <div className="mt-7 flex flex-wrap items-center gap-2" aria-label={copy.socialLabel}>
-                {linksWithCv.map(({ label, href, icon: Icon, ...rest }) => (
+                {links.map(({ label, href, icon: Icon, ...rest }) => (
                   <a
                     key={label}
                     href={href}
