@@ -1,8 +1,6 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { ArrowUpRight, BookOpen, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
-import { listPosts } from '@/lib/posts'
-import { localePrefix, siteUrl } from '@/lib/url'
+import { siteUrl } from '@/lib/url'
 import { type Locale, owner, type Project, siteCopy, toolkit } from './data'
 import { SiteHeader } from './site-header'
 
@@ -40,8 +38,6 @@ function Section({
 
 export function HomePage({ locale, projects }: { locale: Locale; projects: Project[] }) {
   const copy = siteCopy[locale]
-  const prefix = localePrefix(locale)
-  const writingPosts = listPosts(locale)
   const links = locale === 'zh'
     ? [...socialLinks.slice(0, 2), rednoteLink, ...socialLinks.slice(2)]
     : socialLinks
@@ -135,43 +131,6 @@ export function HomePage({ locale, projects }: { locale: Locale; projects: Proje
             ))}
           </div>
         </Section>
-
-        {writingPosts.length > 0 && (
-          <Section id="writing" label={copy.writingLabel}>
-            <div className="divide-y divide-border">
-              {writingPosts.slice(0, 3).map((post) => (
-                <article key={post.slug} className="group max-w-2xl py-8 first:pt-0 last:pb-0">
-                  <p className="text-sm text-muted-foreground">
-                    <time dateTime={post.dateTime}>{post.date}</time>
-                    <span aria-hidden="true"> · </span>
-                    {post.languages.join(' · ')}
-                  </p>
-                  <h3 className="mt-2 text-2xl font-semibold tracking-tight">
-                    <Link href={`${prefix}/writing/${post.slug}`} className="title-link inline-flex min-h-11 items-center">
-                      {post.title}
-                    </Link>
-                  </h3>
-                  <p className="mt-3 leading-7 text-muted-foreground">{post.excerpt}</p>
-                  <Link
-                    href={`${prefix}/writing/${post.slug}`}
-                    className="title-link mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-medium"
-                    aria-label={`${copy.readMore}: ${post.title}`}
-                  >
-                    {copy.readMore}
-                    <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
-                  </Link>
-                </article>
-              ))}
-            </div>
-            <Link
-              href={`${prefix}/writing`}
-              className="title-link mt-8 inline-flex min-h-11 items-center gap-2 text-sm font-medium"
-            >
-              {copy.allWriting}
-              <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" />
-            </Link>
-          </Section>
-        )}
 
         <footer className="border-t border-border py-6 text-sm text-muted-foreground">
           <span>© 2026 {owner.name}</span>
