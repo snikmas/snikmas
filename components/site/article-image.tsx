@@ -2,8 +2,12 @@
 
 import { useCallback, useEffect, useState, type ImgHTMLAttributes } from 'react'
 import { createPortal } from 'react-dom'
+import { siteUrl } from '@/lib/url'
 
 export function ArticleImage({ src, alt, ...props }: ImgHTMLAttributes<HTMLImageElement>) {
+  const imageSrc = typeof src === 'string' && src.startsWith('/') && !src.startsWith('//')
+    ? siteUrl(src)
+    : src
   const [open, setOpen] = useState(false)
   const close = useCallback(() => setOpen(false), [])
 
@@ -23,7 +27,7 @@ export function ArticleImage({ src, alt, ...props }: ImgHTMLAttributes<HTMLImage
   return (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt} {...props} onClick={() => setOpen(true)} className="cursor-zoom-in" />
+      <img src={imageSrc} alt={alt} {...props} onClick={() => setOpen(true)} className="cursor-zoom-in" />
       {open
         ? createPortal(
             <div
@@ -34,7 +38,7 @@ export function ArticleImage({ src, alt, ...props }: ImgHTMLAttributes<HTMLImage
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={src}
+                src={imageSrc}
                 alt={alt}
                 className="animate-in zoom-in-95 max-h-[85vh] max-w-[min(90vw,64rem)] rounded-md object-contain duration-200"
               />
