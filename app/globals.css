@@ -164,10 +164,6 @@
     background: oklch(0.2 0.012 85 / 0.72);
   }
 
-  .title-link:visited {
-    color: oklch(0.76 0.055 78);
-  }
-
   .article-copy {
     @apply text-[1.05rem] leading-8 text-foreground;
   }
