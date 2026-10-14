@@ -37,6 +37,7 @@ describe('real registry', () => {
   it('lists English posts newest first', () => {
     const posts = listPosts('en')
     expect(posts.map((p) => p.slug)).toEqual([
+      'what-junior-and-mid-level-engineers-mean-nowadays',
       'data-pipeline-design',
       'i-learned-to-code-now-i-have-to-explain-it',
       'setup-your-own-vpn',
